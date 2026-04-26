@@ -8,794 +8,1383 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --teal:#009B8D;--teal-dark:#007A6E;--teal-light:#E6F5F4;
-  --teal-mid:rgba(0,155,141,0.08);--charcoal:#1C1C1C;
-  --white:#FFFFFF;--off-white:#F7F9F9;--border:#E0EBEA;
-  --body:#4A5568;--muted:#8A9BA8;--head:#1C1C1C;
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; color: #4A5568; background: #fff; line-height: 1.65; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+/* ─── TOKENS ─── */
+:root {
+  --teal:        #009B8D;
+  --teal-dark:   #007A6E;
+  --teal-light:  #E6F5F4;
+  --teal-faint:  rgba(0,155,141,0.07);
+  --teal-border: rgba(0,155,141,0.15);
+  --charcoal:    #1C1C1C;
+  --off-white:   #F7F9F9;
+  --border:      #E0EBEA;
+  --text:        #4A5568;
+  --head:        #1C1C1C;
+  --muted:       #8A9BA8;
+  --card-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --card-hover:  0 12px 40px rgba(0,0,0,0.10);
 }
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:var(--body);background:var(--white);line-height:1.65;font-size:16px}
-.container{max-width:1200px;margin:0 auto;padding:0 32px}
-.section{padding:100px 0}
-.alt{background:var(--off-white)}
-.section-header{text-align:center;margin-bottom:64px}
-.label{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);background:var(--teal-mid);padding:6px 16px;border-radius:6px;margin-bottom:16px;border:1px solid rgba(0,155,141,.15)}
-.h2{font-family:'Montserrat',sans-serif;font-size:clamp(30px,3.2vw,46px);font-weight:900;color:var(--head);line-height:1.1;margin-bottom:18px;letter-spacing:-.025em}
-.sub{font-size:17px;line-height:1.85;color:var(--body);max-width:600px;margin:0 auto}
 
-/* SVG icon utility */
-.ico{display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ico svg{display:block}
+/* ─── LAYOUT ─── */
+.container  { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.section    { padding: 96px 0; }
+.section-alt{ background: var(--off-white); }
 
-.btn-p{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;border-radius:8px;background:var(--teal);color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.06em;border:none;cursor:pointer;transition:all .22s;text-transform:uppercase}
-.btn-p:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,155,141,.3)}
-.btn-o{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;border-radius:8px;border:2px solid var(--teal);background:transparent;color:var(--teal);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:all .22s;text-transform:uppercase}
-.btn-o:hover{background:var(--teal-mid)}
+/* ─── TYPOGRAPHY ─── */
+.mont { font-family: 'Montserrat', sans-serif; }
+.section-label {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--teal); background: var(--teal-faint);
+  padding: 6px 16px; border-radius: 6px;
+  margin-bottom: 16px; border: 1px solid var(--teal-border);
+}
+.section-h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 900; color: var(--head);
+  line-height: 1.1; margin-bottom: 16px;
+  letter-spacing: -.025em;
+}
+.section-sub {
+  font-size: 17px; line-height: 1.85;
+  color: var(--text); max-width: 600px; margin: 0 auto;
+}
+.section-header { text-align: center; margin-bottom: 60px; }
 
-/* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
-#nav.scrolled{box-shadow:0 2px 24px rgba(0,0,0,.08)}
-.nav-i{display:flex;align-items:stretch;justify-content:space-between;min-height:70px}
-.logo{display:flex;align-items:center;gap:13px;text-decoration:none;padding:0 4px;flex-shrink:0}
-.logo-tb{display:flex;flex-direction:column;line-height:1}
-.logo-name{font-family:'Montserrat',sans-serif;font-size:19px;font-weight:900;color:var(--head);letter-spacing:.05em;text-transform:uppercase}
-.logo-tag{font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-top:4px}
-.nl{display:flex;align-items:center;gap:4px}
-.nlk{background:none;border:none;font-size:14.5px;font-weight:500;color:var(--body);cursor:pointer;font-family:'Inter',sans-serif;transition:color .2s;padding:8px 16px;border-radius:6px}
-.nlk:hover{color:var(--teal);background:var(--teal-mid)}
-.ncta{padding:0 28px;background:var(--teal);color:#fff;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;letter-spacing:.07em;text-transform:uppercase;border-left:1px solid rgba(0,0,0,.06)}
-.ncta:hover{background:var(--teal-dark)}
-.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:10px;margin-right:4px}
-.hbg span{display:block;width:24px;height:2px;background:var(--head);border-radius:2px;transition:all .3s}
-.hbg.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.hbg.open span:nth-child(2){opacity:0}
-.hbg.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mmenu{display:none;flex-direction:column;gap:2px;background:#fff;border-top:1px solid var(--border);padding:12px 20px 20px}
-.mmenu.open{display:flex}
-.mlink{background:none;border:none;font-size:15px;font-weight:500;color:var(--body);cursor:pointer;font-family:'Inter',sans-serif;padding:12px 8px;border-bottom:1px solid var(--border);text-align:left}
-.mcta{margin-top:12px;padding:14px;border-radius:8px;background:var(--teal);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;letter-spacing:.06em;text-transform:uppercase}
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 30px; border-radius: 8px;
+  background: var(--teal); color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: .07em;
+  border: none; cursor: pointer; transition: all .2s;
+  text-transform: uppercase;
+}
+.btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,155,141,.28); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 30px; border-radius: 8px;
+  border: 2px solid var(--teal); background: transparent; color: var(--teal);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: .07em;
+  cursor: pointer; transition: all .2s; text-transform: uppercase;
+}
+.btn-outline:hover { background: var(--teal-faint); }
 
-/* HERO */
-#home{min-height:100vh;display:flex;align-items:center;background:var(--white);position:relative;overflow:hidden;padding-top:70px}
-.h-tint{position:absolute;top:0;right:0;width:52%;height:100%;background:linear-gradient(135deg,var(--off-white) 0%,var(--teal-light) 100%);clip-path:polygon(16% 0,100% 0,100% 100%,0 100%);pointer-events:none}
-.h-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:80px 0 60px;position:relative;width:100%}
-.h-eye{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:6px;border:1px solid rgba(0,155,141,.22);background:rgba(0,155,141,.06);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:24px}
-.bdot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:bpulse 2.2s infinite}
-@keyframes bpulse{0%,100%{opacity:1}50%{opacity:.3}}
-.h1{font-family:'Montserrat',sans-serif;font-size:clamp(38px,5vw,66px);font-weight:900;line-height:1.04;color:var(--head);margin-bottom:24px;letter-spacing:-.03em}
-.h1 .ac{color:var(--teal)}
-.hsub{font-size:17px;line-height:1.85;color:var(--body);max-width:470px;margin-bottom:40px}
-.hbtns{display:flex;gap:16px;flex-wrap:wrap}
-.hdiv{width:48px;height:3px;background:var(--teal);border-radius:2px;margin:42px 0 32px}
-.hstats{display:flex;gap:44px}
-.hsv{font-family:'Montserrat',sans-serif;font-size:30px;font-weight:900;color:var(--head);letter-spacing:-.02em}
-.hsv em{color:var(--teal);font-style:normal}
-.hsl{font-size:12px;color:var(--muted);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
-.h-vis{display:flex;justify-content:center;align-items:center;position:relative}
-.hcard{width:380px;border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.14);border:1px solid rgba(0,0,0,.06)}
-.hc-top{background:var(--teal);padding:52px 32px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden}
-.hc-pat{position:absolute;inset:0;opacity:.06;background-image:repeating-linear-gradient(45deg,white 0,white 1px,transparent 0,transparent 50%);background-size:22px 22px}
-.hc-name{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:.12em;text-transform:uppercase;margin-top:18px;position:relative}
-.hc-tag{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:7px;position:relative}
-.hc-bot{background:var(--charcoal);padding:24px 28px;display:flex;flex-direction:column;gap:14px}
-.hc-row{display:flex;align-items:center;gap:12px}
-.hc-dot{width:32px;height:32px;border-radius:7px;background:rgba(0,155,141,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.hc-txt{font-size:12.5px;color:rgba(255,255,255,.74);line-height:1.5}
-.fpill{position:absolute;background:#fff;border-radius:100px;box-shadow:0 6px 24px rgba(0,0,0,.12);padding:10px 18px;display:flex;align-items:center;gap:10px;border:1px solid var(--border)}
-.fpill.tl{top:-14px;left:-22px}
-.fpill.br{bottom:-14px;right:-14px}
-.fp-n{font-size:11px;font-weight:700;color:var(--head);font-family:'Montserrat',sans-serif}
-.fp-s{font-size:10px;color:var(--muted)}
+/* ─── NAVBAR ─── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: rgba(255,255,255,.97); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+#nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.08); }
+.nav-inner {
+  display: flex; align-items: stretch; justify-content: space-between;
+  min-height: 68px;
+}
+.logo {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; padding: 0 4px; flex-shrink: 0;
+}
+.logo-text-block { display: flex; flex-direction: column; line-height: 1; }
+.logo-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px; font-weight: 900; color: var(--head);
+  letter-spacing: .05em; text-transform: uppercase;
+}
+.logo-tagline {
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--teal); margin-top: 4px;
+}
+.nav-links { display: flex; align-items: center; gap: 2px; }
+.nav-link {
+  background: none; border: none;
+  font-size: 14px; font-weight: 500; color: var(--text);
+  cursor: pointer; font-family: 'Inter', sans-serif;
+  padding: 8px 16px; border-radius: 6px; transition: all .2s;
+}
+.nav-link:hover { color: var(--teal); background: var(--teal-faint); }
+.nav-cta {
+  padding: 0 28px; background: var(--teal); color: #fff;
+  font-size: 13px; font-weight: 700; border: none; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; transition: background .2s;
+  letter-spacing: .07em; text-transform: uppercase;
+  border-left: 1px solid rgba(0,0,0,.06);
+}
+.nav-cta:hover { background: var(--teal-dark); }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 10px; margin-right: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--head); border-radius: 2px; transition: all .3s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+.mobile-menu {
+  display: none; flex-direction: column; gap: 2px;
+  background: #fff; border-top: 1px solid var(--border);
+  padding: 12px 20px 20px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-link {
+  background: none; border: none; font-size: 15px; font-weight: 500;
+  color: var(--text); cursor: pointer; font-family: 'Inter', sans-serif;
+  padding: 12px 8px; border-bottom: 1px solid var(--border); text-align: left;
+}
+.mobile-cta {
+  margin-top: 12px; padding: 14px; border-radius: 8px;
+  background: var(--teal); color: #fff; font-size: 14px; font-weight: 700;
+  border: none; cursor: pointer; font-family: 'Montserrat', sans-serif;
+  letter-spacing: .06em; text-transform: uppercase;
+}
 
-/* ABOUT */
-.ab-grid{display:grid;grid-template-columns:1fr 2fr;gap:24px;margin-bottom:28px}
-.ab-who{border-radius:12px;padding:36px;background:var(--teal);color:#fff;box-shadow:0 16px 48px rgba(0,155,141,.25)}
-.ab-who-i{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
-.ab-who h3{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;margin-bottom:14px}
-.ab-who p{font-size:15px;line-height:1.82;opacity:.9}
-.ab-who-s{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.2)}
-.aws-v{font-family:'Montserrat',sans-serif;font-size:21px;font-weight:800}
-.aws-l{font-size:11px;opacity:.65;margin-top:3px}
-.ab-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.acard{background:#fff;border-radius:12px;padding:32px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.04);transition:all .25s}
-.acard:hover{box-shadow:0 10px 32px rgba(0,0,0,.09);transform:translateY(-3px)}
-.ac-ico{width:48px;height:48px;border-radius:10px;background:var(--teal-mid);border:1px solid rgba(0,155,141,.15);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-.acard h3{font-family:'Montserrat',sans-serif;font-size:19px;font-weight:800;color:var(--head);margin-bottom:12px}
-.acard p{font-size:14.5px;line-height:1.82;color:var(--body)}
-.ac-tag{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
-.mlist{list-style:none;display:flex;flex-direction:column;gap:11px}
-.mitem{display:flex;align-items:flex-start;gap:11px;font-size:14.5px;color:var(--body)}
-.mchk{width:20px;height:20px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.pstrip{background:#fff;border-radius:12px;border:1px solid var(--border);padding:32px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
-.plbl{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);text-align:center;margin-bottom:28px}
-.psteps{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
-.pst{text-align:center}
-.pst-i{width:40px;height:40px;border-radius:10px;background:var(--teal-mid);border:1px solid rgba(0,155,141,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
-.pst-n{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:var(--teal);margin-bottom:4px}
-.pst-l{font-size:11px;color:var(--muted);line-height:1.4}
+/* ─── HERO ─── */
+#home {
+  min-height: 100vh; display: flex; align-items: center;
+  background: #fff; position: relative; overflow: hidden;
+  padding-top: 68px;
+}
+.hero-bg-tint {
+  position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+  background: linear-gradient(145deg, var(--off-white) 0%, var(--teal-light) 100%);
+  clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+  padding: 80px 0 60px; position: relative; width: 100%;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 16px; border-radius: 6px;
+  border: 1px solid var(--teal-border); background: var(--teal-faint);
+  font-size: 11px; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 24px;
+  font-family: 'Montserrat', sans-serif;
+}
+.pulse-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--teal); animation: pulse 2.2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.hero-h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 900; line-height: 1.04;
+  color: var(--head); margin-bottom: 22px;
+  letter-spacing: -.03em;
+}
+.hero-h1 .accent { color: var(--teal); }
+.hero-sub {
+  font-size: 16.5px; line-height: 1.85;
+  color: var(--text); max-width: 460px; margin-bottom: 36px;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-divider {
+  width: 48px; height: 3px; background: var(--teal);
+  border-radius: 2px; margin: 40px 0 30px;
+}
+.hero-stats { display: flex; gap: 40px; }
+.stat-val {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px; font-weight: 900; color: var(--head);
+}
+.stat-val em { color: var(--teal); font-style: normal; }
+.stat-lbl {
+  font-size: 11px; color: var(--muted); margin-top: 4px;
+  font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
+}
+/* Hero visual card */
+.hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+.brand-card {
+  width: 360px; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,.14);
+  border: 1px solid rgba(0,0,0,.06);
+}
+.brand-card-top {
+  background: var(--teal); padding: 48px 32px 36px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; position: relative; overflow: hidden;
+}
+.brand-card-pattern {
+  position: absolute; inset: 0; opacity: .06;
+  background-image: repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%);
+  background-size: 22px 22px;
+}
+.brand-card-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px; font-weight: 900; color: #fff;
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-top: 16px; position: relative;
+}
+.brand-card-tag {
+  font-size: 9.5px; font-weight: 600; letter-spacing: .2em;
+  text-transform: uppercase; color: rgba(255,255,255,.7);
+  margin-top: 6px; position: relative;
+}
+.brand-card-bottom {
+  background: var(--charcoal); padding: 24px 28px;
+  display: flex; flex-direction: column; gap: 13px;
+}
+.brand-card-row { display: flex; align-items: center; gap: 12px; }
+.brand-card-ico {
+  width: 32px; height: 32px; border-radius: 7px;
+  background: rgba(0,155,141,.25);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.brand-card-txt { font-size: 12.5px; color: rgba(255,255,255,.75); line-height: 1.5; }
+/* Float pills */
+.float-pill {
+  position: absolute; background: #fff; border-radius: 100px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.12);
+  padding: 10px 16px; display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--border);
+}
+.float-pill.top-left  { top: -14px; left: -24px; }
+.float-pill.bot-right { bottom: -14px; right: -14px; }
+.pill-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: var(--head); }
+.pill-sub   { font-size: 10px; color: var(--muted); }
+.pill-icon  { width: 30px; height: 30px; border-radius: 8px; background: var(--teal-faint); border: 1px solid var(--teal-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-/* SERVICES */
-.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.sc{background:#fff;border-radius:12px;padding:28px;border:1px solid var(--border);border-top:3px solid transparent;box-shadow:0 2px 8px rgba(0,0,0,.04);transition:all .25s;cursor:default;display:flex;flex-direction:column}
-.sc:hover{box-shadow:0 14px 40px rgba(0,0,0,.1);transform:translateY(-4px);border-top-color:var(--teal)}
-.sc-h{display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.sc-ico{width:40px;height:40px;border-radius:9px;background:var(--teal-mid);border:1px solid rgba(0,155,141,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sc-t{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:var(--head);line-height:1.25;letter-spacing:-.01em}
-.sc-d{font-size:13.5px;color:#718096;line-height:1.72;margin-bottom:14px}
-.sc-ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:auto}
-.sc-li{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--body)}
-.sc-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:6px}
+/* ─── ABOUT ─── */
+.about-grid   { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 28px; }
+.about-who    {
+  border-radius: 14px; padding: 36px;
+  background: var(--teal); color: #fff;
+  box-shadow: 0 16px 48px rgba(0,155,141,.22);
+}
+.about-who-ico {
+  width: 48px; height: 48px; border-radius: 10px;
+  background: rgba(255,255,255,.18);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.about-who h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 21px; font-weight: 800; margin-bottom: 14px;
+}
+.about-who p  { font-size: 15px; line-height: 1.82; opacity: .9; }
+.about-who-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  margin-top: 24px; padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.2);
+}
+.stat-big-val { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800; }
+.stat-big-lbl { font-size: 11px; opacity: .65; margin-top: 3px; }
+.about-cards  { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.about-card {
+  background: #fff; border-radius: 14px; padding: 30px;
+  border: 1px solid var(--border); box-shadow: var(--card-shadow);
+  transition: box-shadow .25s, transform .25s;
+}
+.about-card:hover { box-shadow: var(--card-hover); transform: translateY(-3px); }
+.about-card-ico {
+  width: 46px; height: 46px; border-radius: 10px;
+  background: var(--teal-faint); border: 1px solid var(--teal-border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.about-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px; font-weight: 800; color: var(--head); margin-bottom: 12px;
+}
+.about-card p  { font-size: 14px; line-height: 1.82; color: var(--text); }
+.about-card-tag {
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border);
+  font-size: 10px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--teal);
+}
+.mission-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.mission-item { display: flex; align-items: flex-start; gap: 11px; font-size: 14px; color: var(--text); }
+.mission-check {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--teal); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
 
-/* INDUSTRIES */
-.ig{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px}
-.ic{background:#fff;border-radius:12px;padding:22px 24px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;align-items:center;gap:16px;transition:all .25s;cursor:default}
-.ic:hover{box-shadow:0 8px 28px rgba(0,0,0,.09);transform:translateY(-3px)}
-.ic-i{width:52px;height:52px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--teal-mid);border:1px solid rgba(0,155,141,.12);flex-shrink:0;transition:transform .25s}
-.ic:hover .ic-i{transform:scale(1.08)}
-.ic-n{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:var(--head);line-height:1.3}
-.ibanner{border-radius:12px;padding:44px;text-align:center;color:#fff;background:var(--charcoal);position:relative;overflow:hidden}
-.ib-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--teal)}
-.ib-lbl{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.45;margin-bottom:12px;position:relative}
-.ibanner h3{font-family:'Montserrat',sans-serif;font-size:clamp(20px,2.5vw,32px);font-weight:800;margin-bottom:22px;position:relative;letter-spacing:-.02em}
-.itags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;position:relative}
-.itag{padding:8px 20px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-family:'Montserrat',sans-serif;letter-spacing:.04em}
+/* ─── PROCESS STRIP ─── */
+.process-strip {
+  background: #fff; border-radius: 14px;
+  border: 1px solid var(--border); padding: 36px;
+  box-shadow: var(--card-shadow);
+}
+.process-intro {
+  text-align: center; font-size: 15px; color: var(--text);
+  max-width: 560px; margin: 0 auto 36px; line-height: 1.8;
+}
+.process-steps { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; }
+.process-step  { text-align: center; }
+.process-step-ico {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: var(--teal-faint); border: 1px solid var(--teal-border);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 8px;
+}
+.process-step-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 700; color: var(--teal); margin-bottom: 4px;
+}
+.process-step-lbl { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.process-outcomes {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border);
+}
+.outcome-box {
+  text-align: center; padding: 20px 16px; border-radius: 10px;
+  background: var(--teal-faint); border: 1px solid var(--teal-border);
+}
+.outcome-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 800; color: var(--head); margin-bottom: 7px;
+}
+.outcome-desc { font-size: 12.5px; color: var(--text); line-height: 1.65; }
 
-/* WHY US */
-.wg{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.wc{background:#fff;border-radius:12px;padding:28px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.04);transition:all .25s;cursor:default}
-.wc:hover{box-shadow:0 10px 32px rgba(0,0,0,.09);transform:translateY(-3px)}
-.wc-i{width:50px;height:50px;border-radius:10px;background:var(--teal-mid);border:1px solid rgba(0,155,141,.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;transition:transform .2s}
-.wc:hover .wc-i{transform:scale(1.08)}
-.wc h4{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--head);margin-bottom:8px}
-.wc p{font-size:13.5px;line-height:1.75;color:#718096}
+/* ─── SERVICES ─── */
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.service-card {
+  background: #fff; border-radius: 14px; padding: 28px;
+  border: 1px solid var(--border); border-top: 3px solid transparent;
+  box-shadow: var(--card-shadow);
+  transition: all .25s; cursor: default;
+  display: flex; flex-direction: column;
+}
+.service-card:hover {
+  box-shadow: var(--card-hover); transform: translateY(-4px);
+  border-top-color: var(--teal);
+}
+.service-card-head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.service-card-ico {
+  width: 42px; height: 42px; border-radius: 9px;
+  background: var(--teal-faint); border: 1px solid var(--teal-border);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.service-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px; font-weight: 800; color: var(--head);
+  line-height: 1.25; letter-spacing: -.01em;
+}
+.service-card-desc { font-size: 13px; color: #718096; line-height: 1.72; margin-bottom: 16px; }
+.service-card-bullets { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-top: auto; }
+.service-card-bullet  { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; color: var(--text); }
+.bullet-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal); flex-shrink: 0; margin-top: 6px;
+}
 
-/* CTA */
-#cta{padding:100px 0;background:var(--charcoal);position:relative;overflow:hidden}
-.cta-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--teal)}
-.cta-glow{position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,155,141,.11),transparent 70%);pointer-events:none}
-.cta-in{position:relative;text-align:center;color:#fff;max-width:700px;margin:0 auto;padding:0 32px}
-.cta-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:7px 18px;border-radius:6px;border:1px solid rgba(0,155,141,.4);background:rgba(0,155,141,.12);color:rgba(0,220,200,.9);margin-bottom:24px;font-family:'Montserrat',sans-serif}
-.cta-h2{font-family:'Montserrat',sans-serif;font-size:clamp(28px,3.5vw,50px);font-weight:900;margin-bottom:20px;line-height:1.08;letter-spacing:-.025em}
-.cta-h2 em{color:var(--teal);font-style:normal}
-.cta-s{font-size:16px;opacity:.7;line-height:1.85;margin-bottom:40px}
-.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn-t{padding:16px 36px;border-radius:8px;background:var(--teal);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .22s;letter-spacing:.06em;text-transform:uppercase}
-.btn-t:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,155,141,.4)}
-.btn-g{padding:16px 36px;border-radius:8px;border:2px solid rgba(255,255,255,.22);background:transparent;color:rgba(255,255,255,.85);font-size:14px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .22s;letter-spacing:.06em;text-transform:uppercase}
-.btn-g:hover{background:rgba(255,255,255,.07)}
-.cta-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:320px;margin:52px auto 0;padding-top:40px;border-top:1px solid rgba(255,255,255,.1)}
-.csv{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:var(--teal)}
-.csl{font-size:11px;opacity:.5;margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
+/* ─── INDUSTRIES ─── */
+.industries-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  margin-bottom: 32px;
+}
+.industry-card {
+  background: #fff; border-radius: 12px; padding: 22px 24px;
+  border: 1px solid var(--border); box-shadow: var(--card-shadow);
+  display: flex; align-items: center; gap: 16px;
+  transition: all .25s; cursor: default;
+}
+.industry-card:hover { box-shadow: var(--card-hover); transform: translateY(-3px); }
+.industry-icon {
+  width: 52px; height: 52px; border-radius: 10px;
+  background: var(--teal-faint); border: 1px solid var(--teal-border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: transform .25s;
+}
+.industry-card:hover .industry-icon { transform: scale(1.08); }
+.industry-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14.5px; font-weight: 700; color: var(--head); line-height: 1.3;
+}
+.industry-banner {
+  border-radius: 14px; padding: 44px;
+  text-align: center; color: #fff;
+  background: var(--charcoal); position: relative; overflow: hidden;
+}
+.industry-banner-bar {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px; background: var(--teal);
+}
+.industry-banner-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; opacity: .45;
+  margin-bottom: 12px; position: relative;
+  font-family: 'Montserrat', sans-serif;
+}
+.industry-banner h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(20px, 2.5vw, 30px); font-weight: 800;
+  margin-bottom: 22px; position: relative; letter-spacing: -.02em;
+}
+.industry-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; position: relative; }
+.industry-tag {
+  padding: 8px 20px; border-radius: 6px; font-size: 12px; font-weight: 600;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+  font-family: 'Montserrat', sans-serif; letter-spacing: .04em;
+}
 
-/* CONTACT */
-.cg{display:grid;grid-template-columns:2fr 3fr;gap:28px;align-items:start}
-.ci-card{border-radius:12px;padding:36px;background:var(--charcoal);color:#fff;box-shadow:0 16px 48px rgba(0,0,0,.2);position:relative;overflow:hidden}
-.ci-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--teal)}
-.ci-card h3{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;margin-bottom:28px;letter-spacing:-.01em}
-.ci-list{display:flex;flex-direction:column;gap:20px}
-.ci-item{display:flex;align-items:flex-start;gap:14px}
-.ci-ico{width:42px;height:42px;border-radius:8px;background:rgba(0,155,141,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ci-lbl{font-size:10px;opacity:.5;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:3px}
-.ci-val{font-size:14.5px;font-weight:500;line-height:1.55}
-.ctags-c{background:#fff;border-radius:12px;padding:24px;border:1px solid var(--border);margin-top:18px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.ctags-l{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
-.ctags{display:flex;flex-wrap:wrap;gap:8px}
-.ctag{padding:7px 15px;border-radius:6px;font-size:12px;font-weight:600;color:var(--teal);border:1px solid rgba(0,155,141,.22);background:rgba(0,155,141,.06);font-family:'Montserrat',sans-serif}
-.fcard{background:#fff;border-radius:12px;padding:36px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.fg{display:flex;flex-direction:column;gap:7px;margin-top:20px}
-.fg.n0{margin-top:0}
-.flbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--body);font-family:'Montserrat',sans-serif}
-.finput,.ftarea{padding:14px 16px;border-radius:8px;border:1.5px solid #D1DDE0;font-size:15px;color:var(--head);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s;width:100%}
-.finput:focus,.ftarea:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(0,155,141,.1)}
-.ftarea{resize:none;min-height:140px}
-.fsub{width:100%;margin-top:22px;padding:16px;border-radius:8px;background:var(--teal);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .22s;letter-spacing:.06em;text-transform:uppercase}
-.fsub:hover{background:var(--teal-dark);box-shadow:0 6px 20px rgba(0,155,141,.3)}
-.sstate{text-align:center;padding:64px 20px;display:none}
-.ss-i{width:64px;height:64px;border-radius:50%;background:var(--teal-mid);border:2px solid rgba(0,155,141,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
-.ss-t{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:var(--head);margin-bottom:10px}
-.ss-s{font-size:15px;color:#718096;line-height:1.72}
+/* ─── WHY US ─── */
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.why-card {
+  background: #fff; border-radius: 14px; padding: 28px;
+  border: 1px solid var(--border); box-shadow: var(--card-shadow);
+  transition: all .25s; cursor: default;
+}
+.why-card:hover { box-shadow: var(--card-hover); transform: translateY(-3px); }
+.why-card-ico {
+  width: 50px; height: 50px; border-radius: 10px;
+  background: var(--teal-faint); border: 1px solid var(--teal-border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; transition: transform .2s;
+}
+.why-card:hover .why-card-ico { transform: scale(1.08); }
+.why-card h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14.5px; font-weight: 800; color: var(--head); margin-bottom: 8px;
+}
+.why-card p { font-size: 13.5px; line-height: 1.75; color: #718096; }
 
-/* FOOTER */
-footer{background:#111111;color:#fff;padding:0}
-.ft-bar{height:4px;background:var(--teal)}
-.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:44px;padding:60px 0 48px}
-.ft-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.ft-ln{font-family:'Montserrat',sans-serif;font-size:17px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.06em}
-.ft-lt{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-top:3px}
-.ft-desc{font-size:13.5px;line-height:1.85;color:#8A9BA8;margin-bottom:20px}
-.ft-soc{display:flex;gap:10px}
-.fsoc{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
-.fsoc:hover{background:rgba(0,155,141,.3)}
-.ft-col h4{font-family:'Montserrat',sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--teal);margin-bottom:20px}
-.ftlinks{list-style:none;display:flex;flex-direction:column;gap:11px}
-.ftl{font-size:13.5px;color:#8A9BA8;cursor:pointer;transition:color .2s;background:none;border:none;text-align:left;font-family:'Inter',sans-serif;padding:0}
-.ftl:hover{color:#fff}
-.ftci{display:flex;flex-direction:column;gap:13px}
-.ftci-r{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#8A9BA8;line-height:1.55}
-.ftci-r a{color:#8A9BA8;text-decoration:none;transition:color .2s}
-.ftci-r a:hover{color:#fff}
-.ft-bot{border-top:1px solid rgba(255,255,255,.07);padding:22px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.ft-copy{font-size:12px;color:#5A6A74}
-.ft-leg{display:flex;gap:22px}
-.ft-leg span{font-size:12px;color:#5A6A74;cursor:pointer;transition:color .2s}
-.ft-leg span:hover{color:#fff}
+/* ─── CTA ─── */
+#cta {
+  padding: 96px 0; background: var(--charcoal);
+  position: relative; overflow: hidden;
+}
+.cta-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--teal); }
+.cta-glow {
+  position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,155,141,.1), transparent 70%);
+  pointer-events: none;
+}
+.cta-inner {
+  position: relative; text-align: center; color: #fff;
+  max-width: 720px; margin: 0 auto; padding: 0 40px;
+}
+.cta-badge {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  padding: 7px 18px; border-radius: 6px;
+  border: 1px solid rgba(0,155,141,.4); background: rgba(0,155,141,.12);
+  color: rgba(0,220,200,.9); margin-bottom: 22px;
+  font-family: 'Montserrat', sans-serif;
+}
+.cta-h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(26px, 3.5vw, 46px); font-weight: 900;
+  margin-bottom: 18px; line-height: 1.08; letter-spacing: -.025em;
+}
+.cta-h2 em { color: var(--teal); font-style: normal; }
+.cta-sub { font-size: 16px; opacity: .72; line-height: 1.85; margin-bottom: 36px; }
+.cta-punch {
+  font-size: 15px; font-weight: 600; color: rgba(255,255,255,.6);
+  margin-bottom: 36px; font-style: italic; letter-spacing: .01em;
+}
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-teal {
+  padding: 15px 34px; border-radius: 8px;
+  background: var(--teal); color: #fff;
+  font-size: 13px; font-weight: 700; border: none; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; transition: all .22s;
+  letter-spacing: .07em; text-transform: uppercase;
+}
+.btn-teal:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,155,141,.4); }
+.btn-ghost {
+  padding: 15px 34px; border-radius: 8px;
+  border: 2px solid rgba(255,255,255,.22); background: transparent;
+  color: rgba(255,255,255,.85); font-size: 13px; font-weight: 700;
+  cursor: pointer; font-family: 'Montserrat', sans-serif;
+  transition: all .22s; letter-spacing: .07em; text-transform: uppercase;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.07); }
+.cta-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  max-width: 300px; margin: 48px auto 0;
+  padding-top: 36px; border-top: 1px solid rgba(255,255,255,.1);
+}
+.cta-stat-val { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 900; color: var(--teal); }
+.cta-stat-lbl { font-size: 10px; opacity: .5; margin-top: 4px; letter-spacing: .06em; text-transform: uppercase; }
 
-@media(max-width:1024px){.wg{grid-template-columns:repeat(2,1fr)}.psteps{grid-template-columns:repeat(4,1fr)}.ft-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){.nl{display:none}.hbg{display:flex}.h-inner{grid-template-columns:1fr;gap:40px;padding:60px 0 40px}.h-vis{display:none}.ab-grid{grid-template-columns:1fr}.ab-cards{grid-template-columns:1fr}.sg{grid-template-columns:1fr 1fr}.ig{grid-template-columns:1fr 1fr}.cg{grid-template-columns:1fr}.frow{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr 1fr}.psteps{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:520px){.sg{grid-template-columns:1fr}.ig{grid-template-columns:1fr}.wg{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr}.section{padding:80px 0}.container{padding:0 20px}.hstats{gap:24px}}
+/* ─── CONTACT ─── */
+.contact-grid { display: grid; grid-template-columns: 2fr 3fr; gap: 28px; align-items: start; }
+.contact-info-card {
+  border-radius: 14px; padding: 36px;
+  background: var(--charcoal); color: #fff;
+  box-shadow: 0 16px 48px rgba(0,0,0,.18); position: relative; overflow: hidden;
+}
+.contact-info-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--teal); }
+.contact-info-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 21px; font-weight: 800; margin-bottom: 26px;
+}
+.contact-info-list { display: flex; flex-direction: column; gap: 20px; }
+.contact-info-item { display: flex; align-items: flex-start; gap: 14px; }
+.contact-info-ico {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: rgba(0,155,141,.22);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.contact-info-lbl { font-size: 10px; opacity: .5; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 3px; }
+.contact-info-val { font-size: 14px; font-weight: 500; line-height: 1.55; }
+.contact-authority {
+  margin-top: 22px; padding: 16px 20px; border-radius: 10px;
+  background: rgba(0,155,141,.14); border: 1px solid rgba(0,155,141,.25);
+  font-size: 13px; line-height: 1.65; color: rgba(255,255,255,.8);
+  font-style: italic;
+}
+.contact-tags-card {
+  background: #fff; border-radius: 12px; padding: 22px;
+  border: 1px solid var(--border); margin-top: 16px;
+  box-shadow: var(--card-shadow);
+}
+.contact-tags-lbl {
+  font-size: 10px; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
+.contact-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.contact-tag {
+  padding: 6px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 600;
+  color: var(--teal); border: 1px solid var(--teal-border);
+  background: var(--teal-faint); font-family: 'Montserrat', sans-serif;
+}
+/* Form */
+.form-card {
+  background: #fff; border-radius: 14px; padding: 36px;
+  border: 1px solid var(--border); box-shadow: var(--card-shadow);
+}
+.form-row    { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group  { display: flex; flex-direction: column; gap: 7px; margin-top: 20px; }
+.form-group.no-top { margin-top: 0; }
+.form-label  {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .14em; color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+}
+.form-input, .form-textarea {
+  padding: 13px 16px; border-radius: 8px;
+  border: 1.5px solid #D1DDE0; font-size: 15px; color: var(--head);
+  font-family: 'Inter', sans-serif; outline: none; width: 100%;
+  transition: border-color .2s, box-shadow .2s;
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,155,141,.1);
+}
+.form-textarea { resize: none; min-height: 140px; }
+.form-submit {
+  width: 100%; margin-top: 22px; padding: 15px; border-radius: 8px;
+  background: var(--teal); color: #fff; font-size: 14px; font-weight: 700;
+  border: none; cursor: pointer; font-family: 'Montserrat', sans-serif;
+  transition: all .22s; letter-spacing: .07em; text-transform: uppercase;
+}
+.form-submit:hover { background: var(--teal-dark); box-shadow: 0 6px 20px rgba(0,155,141,.28); }
+.success-state { text-align: center; padding: 64px 20px; display: none; }
+.success-ico {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--teal-faint); border: 2px solid var(--teal-border);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+}
+.success-title {
+  font-family: 'Montserrat', sans-serif; font-size: 21px; font-weight: 800;
+  color: var(--head); margin-bottom: 10px;
+}
+.success-sub { font-size: 15px; color: #718096; line-height: 1.72; }
+
+/* ─── FOOTER ─── */
+footer { background: #111; color: #fff; padding: 0; }
+.footer-top-bar { height: 4px; background: var(--teal); }
+.footer-grid {
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+  gap: 44px; padding: 60px 0 48px;
+}
+.footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.footer-brand-name { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: .05em; }
+.footer-brand-tag  { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-top: 3px; }
+.footer-desc { font-size: 13.5px; line-height: 1.85; color: #8A9BA8; margin-bottom: 20px; }
+.footer-socials { display: flex; gap: 10px; }
+.footer-social {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,.07);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .2s;
+}
+.footer-social:hover { background: rgba(0,155,141,.3); }
+.footer-col h4 {
+  font-family: 'Montserrat', sans-serif; font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .2em; color: var(--teal); margin-bottom: 20px;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.footer-link {
+  font-size: 13.5px; color: #8A9BA8; cursor: pointer;
+  transition: color .2s; background: none; border: none;
+  text-align: left; font-family: 'Inter', sans-serif; padding: 0;
+}
+.footer-link:hover { color: #fff; }
+.footer-contact-list { display: flex; flex-direction: column; gap: 13px; }
+.footer-contact-row { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #8A9BA8; line-height: 1.55; }
+.footer-contact-row a { color: #8A9BA8; text-decoration: none; transition: color .2s; }
+.footer-contact-row a:hover { color: #fff; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.07); padding: 22px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-copy { font-size: 12px; color: #5A6A74; }
+.footer-legal { display: flex; gap: 22px; }
+.footer-legal span { font-size: 12px; color: #5A6A74; cursor: pointer; transition: color .2s; }
+.footer-legal span:hover { color: #fff; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .why-grid       { grid-template-columns: repeat(2, 1fr); }
+  .process-steps  { grid-template-columns: repeat(4, 1fr); }
+  .footer-grid    { grid-template-columns: 1fr 1fr; }
+  .process-outcomes { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .container      { padding: 0 24px; }
+  .section        { padding: 72px 0; }
+  .nav-links      { display: none; }
+  .hamburger      { display: flex; }
+  .hero-grid      { grid-template-columns: 1fr; gap: 40px; padding: 60px 0 40px; }
+  .hero-visual    { display: none; }
+  .about-grid     { grid-template-columns: 1fr; }
+  .about-cards    { grid-template-columns: 1fr; }
+  .services-grid  { grid-template-columns: 1fr 1fr; }
+  .industries-grid{ grid-template-columns: 1fr 1fr; }
+  .contact-grid   { grid-template-columns: 1fr; }
+  .form-row       { grid-template-columns: 1fr; }
+  .footer-grid    { grid-template-columns: 1fr 1fr; }
+  .process-steps  { grid-template-columns: repeat(3, 1fr); }
+  .hero-stats     { gap: 24px; }
+}
+@media (max-width: 520px) {
+  .container       { padding: 0 18px; }
+  .section         { padding: 60px 0; }
+  .services-grid   { grid-template-columns: 1fr; }
+  .industries-grid { grid-template-columns: 1fr; }
+  .why-grid        { grid-template-columns: 1fr; }
+  .footer-grid     { grid-template-columns: 1fr; }
+  .process-outcomes{ grid-template-columns: 1fr; }
+  .cta-inner       { padding: 0 20px; }
+}
+
 </style>
 </head>
 <body>
 
-<!-- ── SVG ICON DEFS (reusable, zero HTTP requests) ── -->
+<!-- ═══════════════════════════════════════════════
+     SVG ICON LIBRARY — all inline, zero HTTP cost
+════════════════════════════════════════════════ -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- contact / footer icons -->
-    <symbol id="ico-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></symbol>
-    <symbol id="ico-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
-    <symbol id="ico-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></symbol>
-    <symbol id="ico-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></symbol>
-    <!-- nav / hero badge icons -->
-    <symbol id="ico-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 22V12h6v10M3 9h18M9 3v6M15 3v6"/></symbol>
-    <symbol id="ico-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
-    <!-- about / mission check -->
-    <symbol id="ico-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
-    <!-- process steps -->
-    <symbol id="ico-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
-    <symbol id="ico-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></symbol>
-    <symbol id="ico-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol>
-    <symbol id="ico-radio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 010 8.49m-8.48-.01a6 6 0 010-8.49m11.31-2.82a10 10 0 010 14.14m-14.14 0a10 10 0 010-14.14"/></symbol>
-    <symbol id="ico-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/></symbol>
-    <symbol id="ico-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
-    <symbol id="ico-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
-    <!-- service icons -->
-    <symbol id="ico-gov" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></symbol>
-    <symbol id="ico-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
-    <symbol id="ico-newspaper" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/><line x1="18" y1="14" x2="12" y2="14"/><line x1="18" y1="10" x2="12" y2="10"/><line x1="18" y1="18" x2="12" y2="18"/></symbol>
-    <symbol id="ico-billboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="11" rx="1"/><line x1="12" y1="14" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></symbol>
-    <symbol id="ico-vote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></symbol>
-    <symbol id="ico-qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><line x1="21" y1="14" x2="21" y2="14"/><line x1="21" y1="19" x2="21" y2="21"/><line x1="17" y1="21" x2="21" y2="21"/></symbol>
-    <symbol id="ico-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
-    <symbol id="ico-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></symbol>
-    <symbol id="ico-ivr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/><path d="M14.05 2a9 9 0 018 7.94"/><path d="M14.05 6A5 5 0 0120 11"/></symbol>
-    <symbol id="ico-atm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></symbol>
-    <symbol id="ico-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
-    <!-- industry icons -->
-    <symbol id="ico-hospital" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="2" width="18" height="20" rx="1"/><line x1="9" y1="22" x2="9" y2="13"/><line x1="15" y1="22" x2="15" y2="13"/><rect x="9" y="13" width="6" height="9"/><line x1="12" y1="6" x2="12" y2="10"/><line x1="10" y1="8" x2="14" y2="8"/></symbol>
-    <symbol id="ico-grad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
-    <symbol id="ico-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></symbol>
-    <symbol id="ico-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></symbol>
-    <symbol id="ico-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><line x1="12" y1="2" x2="22" y2="7"/><line x1="12" y1="2" x2="2" y2="7"/><line x1="2" y1="7" x2="22" y2="7"/></symbol>
-    <symbol id="ico-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></symbol>
-    <!-- why us icons -->
-    <symbol id="ico-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
-    <symbol id="ico-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
-    <symbol id="ico-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="12" y1="8" x2="5" y2="16"/><line x1="12" y1="8" x2="19" y2="16"/></symbol>
-    <symbol id="ico-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
-    <symbol id="ico-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
-    <symbol id="ico-handshake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M6 8H5a4 4 0 000 8h1"/><line x1="6" y1="12" x2="18" y2="12"/></symbol>
-    <symbol id="ico-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
-    <!-- social -->
-    <symbol id="ico-fb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></symbol>
-    <symbol id="ico-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></symbol>
-    <symbol id="ico-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></symbol>
-    <symbol id="ico-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+    <symbol id="i-phone"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></symbol>
+    <symbol id="i-mail"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-globe"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></symbol>
+    <symbol id="i-pin"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-check"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></symbol>
+    <symbol id="i-chart"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+    <symbol id="i-target"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-eye"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-rocket"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/></symbol>
+    <symbol id="i-search"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+    <symbol id="i-map"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></symbol>
+    <symbol id="i-pen"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol>
+    <symbol id="i-radio"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 010 8.49m-8.48-.01a6 6 0 010-8.49m11.31-2.82a10 10 0 010 14.14m-14.14 0a10 10 0 010-14.14"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+    <symbol id="i-monitor"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+    <symbol id="i-paper"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/><line x1="18" y1="14" x2="12" y2="14"/><line x1="18" y1="10" x2="12" y2="10"/></symbol>
+    <symbol id="i-board"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="11" rx="1"/><line x1="12" y1="14" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></symbol>
+    <symbol id="i-vote"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></symbol>
+    <symbol id="i-qr"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/></symbol>
+    <symbol id="i-users"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></symbol>
+    <symbol id="i-ivr"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/><path d="M14.05 2a9 9 0 018 7.94"/><path d="M14.05 6A5 5 0 0120 11"/></symbol>
+    <symbol id="i-atm"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></symbol>
+    <symbol id="i-shield"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-hospital" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="2" width="18" height="20" rx="1"/><line x1="9" y1="22" x2="9" y2="13"/><line x1="15" y1="22" x2="15" y2="13"/><rect x="9" y="13" width="6" height="9"/><line x1="12" y1="6" x2="12" y2="10"/><line x1="10" y1="8" x2="14" y2="8"/></symbol>
+    <symbol id="i-grad"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+    <symbol id="i-briefcase"viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></symbol>
+    <symbol id="i-heart"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></symbol>
+    <symbol id="i-bank"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><line x1="12" y1="2" x2="22" y2="7"/><line x1="12" y1="2" x2="2" y2="7"/><line x1="2" y1="7" x2="22" y2="7"/></symbol>
+    <symbol id="i-store"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></symbol>
+    <symbol id="i-layers"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+    <symbol id="i-award"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+    <symbol id="i-network"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="12" y1="8" x2="5" y2="16"/><line x1="12" y1="8" x2="19" y2="16"/></symbol>
+    <symbol id="i-cpu"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
+    <symbol id="i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+    <symbol id="i-clock"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-fb"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></symbol>
+    <symbol id="i-ig"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></symbol>
+    <symbol id="i-yt"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></symbol>
+    <symbol id="i-li"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
   </defs>
 </svg>
 
-<!-- NAV -->
+<!-- ═══ NAVBAR ═══ -->
 <nav id="nav">
   <div class="container">
-    <div class="nav-i">
+    <div class="nav-inner">
       <a href="#home" class="logo">
-        <img src="logo.png" alt="Visionary Ads" style="height:44px;width:auto;object-fit:contain;display:block"/>
-        <div class="logo-tb">
+        <img src="logo.png" alt="Visionary Ads" style="height:42px;width:auto;object-fit:contain;display:block;"/>
+        <div class="logo-text-block">
           <span class="logo-name">Visionary Ads</span>
-          <span class="logo-tag">Advertising Beyond Boundaries</span>
+          <span class="logo-tagline">Advertising Beyond Boundaries</span>
         </div>
       </a>
-      <div class="nl">
-        <button class="nlk" onclick="go('about')">About</button>
-        <button class="nlk" onclick="go('services')">Services</button>
-        <button class="nlk" onclick="go('industries')">Industries</button>
-        <button class="nlk" onclick="go('contact')">Contact</button>
-        <button class="ncta" onclick="go('contact')">Get in Touch</button>
+      <div class="nav-links">
+        <button class="nav-link" onclick="go('about')">About</button>
+        <button class="nav-link" onclick="go('services')">Services</button>
+        <button class="nav-link" onclick="go('industries')">Industries</button>
+        <button class="nav-link" onclick="go('contact')">Contact</button>
+        <button class="nav-cta"  onclick="go('contact')">Get in Touch</button>
       </div>
-      <button class="hbg" id="hbg" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hbg" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
-  <div class="mmenu" id="mmenu">
-    <button class="mlink" onclick="go('about')">About</button>
-    <button class="mlink" onclick="go('services')">Services</button>
-    <button class="mlink" onclick="go('industries')">Industries</button>
-    <button class="mlink" onclick="go('contact')">Contact</button>
-    <button class="mcta" onclick="go('contact')">Get in Touch</button>
+  <div class="mobile-menu" id="mmenu">
+    <button class="mobile-link" onclick="go('about')">About</button>
+    <button class="mobile-link" onclick="go('services')">Services</button>
+    <button class="mobile-link" onclick="go('industries')">Industries</button>
+    <button class="mobile-link" onclick="go('contact')">Contact</button>
+    <button class="mobile-cta"  onclick="go('contact')">Get in Touch</button>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ═══ HERO ═══ -->
 <section id="home">
-  <div class="h-tint"></div>
+  <div class="hero-bg-tint"></div>
   <div class="container">
-    <div class="h-inner">
+    <div class="hero-grid">
+
+      <!-- Left -->
       <div>
-        <div class="h-eye"><span class="bdot"></span>Government &amp; Corporate Advertising</div>
-        <h1 class="h1">Advertising<br><span class="ac">Beyond</span><br>Boundaries</h1>
-        <p class="hsub">Full-service advertising, outreach, and public communication for government departments, public sector organizations, and corporate institutions — all under one roof.</p>
-        <div class="hbtns">
-          <button class="btn-p" onclick="go('contact')">Start a Campaign</button>
-          <button class="btn-o" onclick="go('services')">Our Services</button>
+        <div class="hero-eyebrow">
+          <span class="pulse-dot"></span>
+          Government &amp; Corporate Advertising
         </div>
-        <div class="hdiv"></div>
-        <div class="hstats">
-          <div><div class="hsv">11<em>+</em></div><div class="hsl">Service Verticals</div></div>
-          <div><div class="hsv">9<em>+</em></div><div class="hsl">Industries Served</div></div>
-          <div><div class="hsv">360<em>°</em></div><div class="hsl">Campaign Coverage</div></div>
+        <h1 class="hero-h1">Advertising<br><span class="accent">Beyond</span><br>Boundaries</h1>
+        <p class="hero-sub">Full-service advertising, outreach, and public communication for government departments, public sector organizations, and corporate institutions — all under one roof.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="go('contact')">Start a Campaign</button>
+          <button class="btn-outline" onclick="go('services')">Our Services</button>
         </div>
-      </div>
-      <div class="h-vis">
-        <div class="hcard">
-          <div class="hc-top">
-            <div class="hc-pat"></div>
-            <img src="logo.png" alt="Visionary Ads" style="width:130px;height:auto;object-fit:contain;display:block;margin:0 auto;position:relative"/>
-            <div class="hc-name">Visionary Ads</div>
-            <div class="hc-tag">Advertising Beyond Boundaries</div>
-          </div>
-          <div class="hc-bot">
-            <div class="hc-row">
-              <div class="hc-dot"><svg width="16" height="16" style="color:#009B8D"><use href="#ico-phone"/></svg></div>
-              <div class="hc-txt">90367 69330 | 99165 42789</div>
-            </div>
-            <div class="hc-row">
-              <div class="hc-dot"><svg width="16" height="16" style="color:#009B8D"><use href="#ico-mail"/></svg></div>
-              <div class="hc-txt">visionaryadss@gmail.com</div>
-            </div>
-            <div class="hc-row">
-              <div class="hc-dot"><svg width="16" height="16" style="color:#009B8D"><use href="#ico-globe"/></svg></div>
-              <div class="hc-txt">visionary-ads.odoo.com</div>
-            </div>
-          </div>
-        </div>
-        <div class="fpill tl">
-          <div style="width:32px;height:32px;border-radius:8px;background:var(--teal-mid);border:1px solid rgba(0,155,141,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="17" height="17" style="color:var(--teal)"><use href="#ico-building"/></svg></div>
-          <div><div class="fp-n">Government</div><div class="fp-s">Certified Partner</div></div>
-        </div>
-        <div class="fpill br">
-          <div style="width:32px;height:32px;border-radius:8px;background:var(--teal-mid);border:1px solid rgba(0,155,141,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="17" height="17" style="color:var(--teal)"><use href="#ico-chart"/></svg></div>
-          <div><div class="fp-n">Transparent</div><div class="fp-s">Reporting System</div></div>
+        <div class="hero-divider"></div>
+        <div class="hero-stats">
+          <div><div class="stat-val">11<em>+</em></div><div class="stat-lbl">Service Verticals</div></div>
+          <div><div class="stat-val">9<em>+</em></div><div class="stat-lbl">Industries Served</div></div>
+          <div><div class="stat-val">360<em>°</em></div><div class="stat-lbl">Campaign Coverage</div></div>
         </div>
       </div>
+
+      <!-- Right visual -->
+      <div class="hero-visual">
+        <div class="brand-card">
+          <div class="brand-card-top">
+            <div class="brand-card-pattern"></div>
+            <img src="logo.png" alt="Visionary Ads" style="width:120px;height:auto;object-fit:contain;display:block;margin:0 auto;position:relative;"/>
+            <div class="brand-card-name">Visionary Ads</div>
+            <div class="brand-card-tag">Advertising Beyond Boundaries</div>
+          </div>
+          <div class="brand-card-bottom">
+            <div class="brand-card-row">
+              <div class="brand-card-ico"><svg width="15" height="15" style="color:#009B8D"><use href="#i-phone"/></svg></div>
+              <div class="brand-card-txt">90367 69330 &nbsp;|&nbsp; 99165 42789</div>
+            </div>
+            <div class="brand-card-row">
+              <div class="brand-card-ico"><svg width="15" height="15" style="color:#009B8D"><use href="#i-mail"/></svg></div>
+              <div class="brand-card-txt">visionaryadss@gmail.com</div>
+            </div>
+            <div class="brand-card-row">
+              <div class="brand-card-ico"><svg width="15" height="15" style="color:#009B8D"><use href="#i-globe"/></svg></div>
+              <div class="brand-card-txt">visionary-ads.odoo.com</div>
+            </div>
+          </div>
+        </div>
+        <div class="float-pill top-left">
+          <div class="pill-icon"><svg width="16" height="16" style="color:var(--teal)"><use href="#i-building"/></svg></div>
+          <div><div class="pill-label">Government</div><div class="pill-sub">Certified Partner</div></div>
+        </div>
+        <div class="float-pill bot-right">
+          <div class="pill-icon"><svg width="16" height="16" style="color:var(--teal)"><use href="#i-chart"/></svg></div>
+          <div><div class="pill-label">Transparent</div><div class="pill-sub">Reporting System</div></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section alt" id="about">
+<!-- ═══ ABOUT ═══ -->
+<section class="section section-alt" id="about">
   <div class="container">
     <div class="section-header">
-      <span class="label">About Us</span>
-      <h2 class="h2">India's Trusted Advertising Partner</h2>
-      <p class="sub">VisionaryAds delivers end-to-end media and campaign solutions for government, public sector, and corporate clients — powered by modern technology and data-driven strategies.</p>
+      <span class="section-label">About Us</span>
+      <h2 class="section-h2">India's Trusted Advertising Partner</h2>
+      <p class="section-sub">VisionaryAds delivers end-to-end media and campaign solutions for government, public sector, and corporate clients — powered by modern technology and data-driven strategies.</p>
     </div>
-    <div class="ab-grid">
-      <div class="ab-who">
-        <div class="ab-who-i"><svg width="24" height="24" style="color:#fff"><use href="#ico-target"/></svg></div>
+
+    <div class="about-grid">
+      <!-- Who we are card -->
+      <div class="about-who">
+        <div class="about-who-ico"><svg width="22" height="22" style="color:#fff"><use href="#i-target"/></svg></div>
         <h3>Who We Are</h3>
-        <p>A full-service advertising company specializing in high-impact campaigns using modern technology, data-driven strategies, and multi-platform media networks — connecting governments, businesses, and communities.</p>
-        <div class="ab-who-s">
-          <div><div class="aws-v">360°</div><div class="aws-l">Campaign Coverage</div></div>
-          <div><div class="aws-v">End-to-End</div><div class="aws-l">Service Model</div></div>
+        <p>A full-service advertising company specializing in high-impact campaigns using modern technology, data-driven strategies, and multi-platform media networks — connecting governments, businesses, and communities through innovative communication systems that deliver measurable impact, transparency, and public awareness.</p>
+        <div class="about-who-stats">
+          <div><div class="stat-big-val">360°</div><div class="stat-big-lbl">Campaign Coverage</div></div>
+          <div><div class="stat-big-val">End-to-End</div><div class="stat-big-lbl">Service Model</div></div>
         </div>
       </div>
-      <div class="ab-cards">
-        <div class="acard">
-          <div class="ac-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-eye"/></svg></div>
+      <!-- Vision + Mission cards -->
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="about-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-eye"/></svg></div>
           <h3>Our Vision</h3>
-          <p>To become the leading advertising and outreach partner for governments, organizations, and businesses — delivering innovative, technology-driven communication solutions that create meaningful public impact.</p>
-          <div class="ac-tag">Innovation · Impact · Scale</div>
+          <p>To become a leading advertising and outreach partner for governments, organizations, and businesses by delivering innovative, technology-driven communication solutions that create meaningful public impact.</p>
+          <div class="about-card-tag">Innovation &nbsp;·&nbsp; Impact &nbsp;·&nbsp; Scale</div>
         </div>
-        <div class="acard">
-          <div class="ac-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-rocket"/></svg></div>
+        <div class="about-card">
+          <div class="about-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-rocket"/></svg></div>
           <h3>Our Mission</h3>
-          <ul class="mlist">
-            <li class="mitem"><span class="mchk"><svg width="12" height="12" style="color:#fff"><use href="#ico-check"/></svg></span>Reliable and scalable advertising solutions</li>
-            <li class="mitem"><span class="mchk"><svg width="12" height="12" style="color:#fff"><use href="#ico-check"/></svg></span>Improve public awareness through smart communication</li>
-            <li class="mitem"><span class="mchk"><svg width="12" height="12" style="color:#fff"><use href="#ico-check"/></svg></span>Support government &amp; corporate outreach initiatives</li>
-            <li class="mitem"><span class="mchk"><svg width="12" height="12" style="color:#fff"><use href="#ico-check"/></svg></span>Deliver measurable and transparent campaign results</li>
-            <li class="mitem"><span class="mchk"><svg width="12" height="12" style="color:#fff"><use href="#ico-check"/></svg></span>Build long-term partnerships with clients</li>
+          <ul class="mission-list">
+            <li class="mission-item"><span class="mission-check"><svg width="12" height="12" style="color:#fff"><use href="#i-check"/></svg></span>Provide reliable and scalable advertising solutions</li>
+            <li class="mission-item"><span class="mission-check"><svg width="12" height="12" style="color:#fff"><use href="#i-check"/></svg></span>Improve public awareness through smart communication</li>
+            <li class="mission-item"><span class="mission-check"><svg width="12" height="12" style="color:#fff"><use href="#i-check"/></svg></span>Support government &amp; corporate outreach initiatives</li>
+            <li class="mission-item"><span class="mission-check"><svg width="12" height="12" style="color:#fff"><use href="#i-check"/></svg></span>Deliver measurable and transparent campaign results</li>
+            <li class="mission-item"><span class="mission-check"><svg width="12" height="12" style="color:#fff"><use href="#i-check"/></svg></span>Build long-term partnerships with clients</li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="pstrip">
-      <div class="plbl">Our End-to-End Service Model</div>
-      <p style="text-align:center;font-size:15px;color:var(--body);max-width:560px;margin:0 auto 36px;line-height:1.8;">VisionaryAds provides complete campaign lifecycle support — ensuring effective communication, transparent operations, and measurable outcomes.</p>
-      <div class="psteps">
-        <div class="pst"><div class="pst-i"><svg width="18" height="18" style="color:var(--teal)"><use href="#ico-search"/></svg></div><div class="pst-n">01</div><div class="pst-l">Requirement Analysis</div></div>
-        <div class="pst"><div class="pst-i"><svg width="18" height="18" style="color:var(--teal)"><use href="#ico-map"/></svg></div><div class="pst-n">02</div><div class="pst-l">Strategy Planning</div></div>
-        <div class="pst"><div class="pst-i"><svg width="18" height="18" style="color:var(--teal)"><use href="#ico-pen"/></svg></div><div class="pst-n">03</div><div class="pst-l">Creative Design</div></div>
-        <div class="pst"><div class="pst-i"><svg width="18" height="18" style="color:var(--teal)"><use href="#ico-radio"/></svg></div><div class="pst-n">04</div><div class="pst-l">Media Selection</div></div>
-        <div class="pst"><div class="pst-i"><svg width="18" height="18" style="color:var(--teal)"><use href="#ico-rocket"/></svg></div><div class="pst-n">05</div><div class="pst-l">Campaign Execution</div></div>
-        <div class="pst"><div class="pst-i"><svg width="18" height="18" style="color:var(--teal)"><use href="#ico-chart"/></svg></div><div class="pst-n">06</div><div class="pst-l">Monitoring & Reporting</div></div>
-        <div class="pst"><div class="pst-i"><svg width="18" height="18" style="color:var(--teal)"><use href="#ico-settings"/></svg></div><div class="pst-n">07</div><div class="pst-l">Performance Optimization</div></div>
+
+    <!-- Process strip -->
+    <div class="process-strip">
+      <p class="section-label" style="display:block;text-align:center;margin-bottom:12px;">Our End-to-End Service Model</p>
+      <p class="process-intro">VisionaryAds provides complete campaign lifecycle support — ensuring effective communication, transparent operations, and measurable outcomes at every stage.</p>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-step-ico"><svg width="18" height="18" style="color:var(--teal)"><use href="#i-search"/></svg></div>
+          <div class="process-step-num">01</div><div class="process-step-lbl">Requirement Analysis</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-ico"><svg width="18" height="18" style="color:var(--teal)"><use href="#i-map"/></svg></div>
+          <div class="process-step-num">02</div><div class="process-step-lbl">Strategy Planning</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-ico"><svg width="18" height="18" style="color:var(--teal)"><use href="#i-pen"/></svg></div>
+          <div class="process-step-num">03</div><div class="process-step-lbl">Creative Design</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-ico"><svg width="18" height="18" style="color:var(--teal)"><use href="#i-radio"/></svg></div>
+          <div class="process-step-num">04</div><div class="process-step-lbl">Media Selection</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-ico"><svg width="18" height="18" style="color:var(--teal)"><use href="#i-rocket"/></svg></div>
+          <div class="process-step-num">05</div><div class="process-step-lbl">Campaign Execution</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-ico"><svg width="18" height="18" style="color:var(--teal)"><use href="#i-chart"/></svg></div>
+          <div class="process-step-num">06</div><div class="process-step-lbl">Monitoring &amp; Reporting</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-ico"><svg width="18" height="18" style="color:var(--teal)"><use href="#i-settings"/></svg></div>
+          <div class="process-step-num">07</div><div class="process-step-lbl">Performance Optimization</div>
+        </div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;padding-top:32px;border-top:1px solid var(--border)">
-        <div style="text-align:center;padding:20px 16px;border-radius:10px;background:var(--teal-mid);border:1px solid rgba(0,155,141,.12)">
-          <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:var(--head);margin-bottom:6px">Measurable Impact</div>
-          <div style="font-size:12.5px;color:var(--body);line-height:1.6">Data-backed campaign performance with real-time tracking and clear outcome reporting.</div>
+      <div class="process-outcomes">
+        <div class="outcome-box">
+          <div class="outcome-title">Measurable Impact</div>
+          <div class="outcome-desc">Data-backed campaign performance with real-time tracking and clear outcome reporting at every stage.</div>
         </div>
-        <div style="text-align:center;padding:20px 16px;border-radius:10px;background:var(--teal-mid);border:1px solid rgba(0,155,141,.12)">
-          <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:var(--head);margin-bottom:6px">Full Transparency</div>
-          <div style="font-size:12.5px;color:var(--body);line-height:1.6">Transparent operations at every stage — from planning through to final reporting and analysis.</div>
+        <div class="outcome-box">
+          <div class="outcome-title">Full Transparency</div>
+          <div class="outcome-desc">Transparent operations from planning through to final reporting — complete visibility for every client.</div>
         </div>
-        <div style="text-align:center;padding:20px 16px;border-radius:10px;background:var(--teal-mid);border:1px solid rgba(0,155,141,.12)">
-          <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:var(--head);margin-bottom:6px">Public Awareness</div>
-          <div style="font-size:12.5px;color:var(--body);line-height:1.6">Designed to connect governments, businesses, and communities through effective communication.</div>
+        <div class="outcome-box">
+          <div class="outcome-title">Public Awareness</div>
+          <div class="outcome-desc">Designed to connect governments, businesses, and communities through effective, wide-reach communication.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ═══ SERVICES ═══ -->
 <section class="section" id="services">
   <div class="container">
     <div class="section-header">
-      <span class="label">Our Services</span>
-      <h2 class="h2">Complete Advertising Solutions</h2>
-      <p class="sub">From government scheme awareness to digital campaigns — every format, channel, and medium your campaign demands.</p>
+      <span class="section-label">Our Services</span>
+      <h2 class="section-h2">Complete Advertising Solutions</h2>
+      <p class="section-sub">From government scheme awareness to digital campaigns — every format, channel, and medium your campaign demands, delivered end-to-end.</p>
     </div>
-    <div class="sg" id="sg">
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-gov"/></svg></div>
-      <span class="sc-t">Government Advertising Solutions</span>
+
+    <div class="services-grid">
+
+      <!-- 1 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-building"/></svg></div>
+          <span class="service-card-title">Government Advertising Solutions</span>
+        </div>
+        <p class="service-card-desc">Comprehensive government advertising designed to increase awareness of public welfare schemes, health programs, education initiatives, and citizen services.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Government Scheme Awareness Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Public Health Awareness Programs</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Election Awareness Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Social Welfare Campaign Promotion</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Rural &amp; Urban Awareness Drives</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Government Tender &amp; Notice Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Departmental Public Information Campaigns</li>
+        </ul>
+      </div>
+
+      <!-- 2 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-monitor"/></svg></div>
+          <span class="service-card-title">LED Wall &amp; Digital Screen Advertising</span>
+        </div>
+        <p class="service-card-desc">High-visibility digital display advertising using LED walls and digital screens at high-traffic public locations for maximum public engagement.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>LED Wall Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Digital Screen Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Outdoor Digital Displays</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>High-Footfall Location Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Day &amp; Night Visibility</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Dynamic Content Updates</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Video &amp; Graphic Display Ads</li>
+        </ul>
+      </div>
+
+      <!-- 3 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-paper"/></svg></div>
+          <span class="service-card-title">Print Media Advertising</span>
+        </div>
+        <p class="service-card-desc">Professional print media campaigns for government and private organizations ensuring credibility, official reach, and legal compliance.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Government Tender Publications</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Public Notices</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Classified Advertisements</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Magazine Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Brochure &amp; Pamphlet Printing</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Flyer &amp; Poster Distribution</li>
+        </ul>
+      </div>
+
+      <!-- 4 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-board"/></svg></div>
+          <span class="service-card-title">Outdoor Media Advertising</span>
+        </div>
+        <p class="service-card-desc">Large-scale outdoor advertising solutions to maximize visibility and brand awareness with high recall value and continuous exposure.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Hoardings &amp; Billboards</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Bus Shelter Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Pole Kiosk Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Wall Painting Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Banner Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Transit Media Advertising</li>
+        </ul>
+      </div>
+
+      <!-- 5 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-vote"/></svg></div>
+          <span class="service-card-title">Digital Election Campaign Solutions</span>
+        </div>
+        <p class="service-card-desc">Strategic election campaign services designed to support political outreach, voter engagement, and maximum message delivery at every constituency level.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Digital Campaign Management</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Social Media Election Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Voter Awareness Programs</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Constituency-Level Outreach</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Campaign Video Production</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Booth-Level Awareness Messaging</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Targeted Digital Advertising</li>
+        </ul>
+      </div>
+
+      <!-- 6 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-qr"/></svg></div>
+          <span class="service-card-title">QR Code–Based Campaign Services</span>
+        </div>
+        <p class="service-card-desc">Smart QR code solutions for digital communication and public awareness, enabling instant information access and paperless communication.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>QR Code Awareness Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Government Scheme Information Access</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Healthcare Information Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Educational Content Delivery</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Interactive Video Awareness Systems</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Prescription Pad QR Solutions</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Smart Information Access Systems</li>
+        </ul>
+      </div>
+
+      <!-- 7 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-globe"/></svg></div>
+          <span class="service-card-title">Google Ads &amp; Social Media Advertising</span>
+        </div>
+        <p class="service-card-desc">Online advertising campaigns across leading digital platforms ensuring targeted reach, cost efficiency, and real-time performance tracking.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Google Ads Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Social Media Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Facebook &amp; Instagram Promotions</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>YouTube Video Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Audience Targeting</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Campaign Analytics &amp; Optimization</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Lead Generation Campaigns</li>
+        </ul>
+      </div>
+
+      <!-- 8 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-users"/></svg></div>
+          <span class="service-card-title">Influencer &amp; Celebrity Advertising</span>
+        </div>
+        <p class="service-card-desc">Connecting brands and government campaigns with trusted influencers and celebrities to amplify message reach, trust, and credibility.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Celebrity Endorsements</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Influencer Marketing Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Awareness Ambassador Programs</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Public Engagement Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Brand Promotion Activities</li>
+        </ul>
+      </div>
+
+      <!-- 9 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-ivr"/></svg></div>
+          <span class="service-card-title">IVR Call Services</span>
+        </div>
+        <p class="service-card-desc">Automated IVR (Interactive Voice Response) systems for mass communication ensuring wide reach, even in rural and remote areas.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Bulk Voice Call Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Government Awareness Calls</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Election Awareness Calls</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Citizen Notification Services</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Emergency Messaging</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Feedback Collection Systems</li>
+        </ul>
+      </div>
+
+      <!-- 10 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-atm"/></svg></div>
+          <span class="service-card-title">White Label ATM Solutions</span>
+        </div>
+        <p class="service-card-desc">Deployment and promotion of White Label ATM services in partnership with financial networks to promote financial accessibility and banking awareness.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>White Label ATM Branding</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>ATM Awareness Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>ATM Location Promotion</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Digital ATM Advertising</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Rural Financial Inclusion Campaigns</li>
+        </ul>
+      </div>
+
+      <!-- 11 -->
+      <div class="service-card">
+        <div class="service-card-head">
+          <div class="service-card-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#i-shield"/></svg></div>
+          <span class="service-card-title">Insurance Services — Two &amp; Four Wheeler</span>
+        </div>
+        <p class="service-card-desc">Insurance facilitation services for vehicles through authorized partners ensuring quick processing, affordable plans, and customer convenience.</p>
+        <ul class="service-card-bullets">
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Two-Wheeler Insurance</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Four-Wheeler Insurance</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Insurance Renewals</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Policy Awareness Campaigns</li>
+          <li class="service-card-bullet"><span class="bullet-dot"></span>Claim Assistance Support</li>
+        </ul>
+      </div>
+
     </div>
-    <p class="sc-d">Comprehensive government advertising services to increase awareness of public welfare schemes, health programs, education initiatives, and citizen services.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>Government Scheme Awareness Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Public Health Awareness Programs</li><li class="sc-li"><span class="sc-dot"></span>Election Awareness Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Social Welfare Campaign Promotion</li><li class="sc-li"><span class="sc-dot"></span>Rural & Urban Awareness Drives</li><li class="sc-li"><span class="sc-dot"></span>Government Tender &amp; Notice Advertising</li><li class="sc-li"><span class="sc-dot"></span>Departmental Public Information Campaigns</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-monitor"/></svg></div>
-      <span class="sc-t">LED Wall &amp; Digital Screen Advertising</span>
-    </div>
-    <p class="sc-d">High-visibility digital display advertising using LED walls and digital screens at high-traffic public locations for maximum public engagement.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>LED Wall Advertising</li><li class="sc-li"><span class="sc-dot"></span>Digital Screen Advertising</li><li class="sc-li"><span class="sc-dot"></span>Outdoor Digital Displays</li><li class="sc-li"><span class="sc-dot"></span>High-Footfall Location Advertising</li><li class="sc-li"><span class="sc-dot"></span>Day &amp; Night Visibility</li><li class="sc-li"><span class="sc-dot"></span>Dynamic Content Updates</li><li class="sc-li"><span class="sc-dot"></span>Video &amp; Graphic Display Ads</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-newspaper"/></svg></div>
-      <span class="sc-t">Print Media Advertising</span>
-    </div>
-    <p class="sc-d">Professional print media campaigns for government and private organizations ensuring credibility, official reach, and legal compliance.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>Government Tender Publications</li><li class="sc-li"><span class="sc-dot"></span>Public Notices</li><li class="sc-li"><span class="sc-dot"></span>Classified Advertisements</li><li class="sc-li"><span class="sc-dot"></span>Magazine Advertising</li><li class="sc-li"><span class="sc-dot"></span>Brochure &amp; Pamphlet Printing</li><li class="sc-li"><span class="sc-dot"></span>Flyer &amp; Poster Distribution</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-billboard"/></svg></div>
-      <span class="sc-t">Outdoor Media Advertising</span>
-    </div>
-    <p class="sc-d">Large-scale outdoor advertising solutions to maximize visibility and brand awareness with high recall value and continuous exposure.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>Hoardings &amp; Billboards</li><li class="sc-li"><span class="sc-dot"></span>Bus Shelter Advertising</li><li class="sc-li"><span class="sc-dot"></span>Pole Kiosk Advertising</li><li class="sc-li"><span class="sc-dot"></span>Wall Painting Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Banner Advertising</li><li class="sc-li"><span class="sc-dot"></span>Transit Media Advertising</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-vote"/></svg></div>
-      <span class="sc-t">Digital Election Campaign Solutions</span>
-    </div>
-    <p class="sc-d">Strategic election campaign services designed to support political outreach, voter engagement, and maximum message delivery.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>Digital Campaign Management</li><li class="sc-li"><span class="sc-dot"></span>Social Media Election Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Voter Awareness Programs</li><li class="sc-li"><span class="sc-dot"></span>Constituency-Level Outreach</li><li class="sc-li"><span class="sc-dot"></span>Campaign Video Production</li><li class="sc-li"><span class="sc-dot"></span>Booth-Level Awareness Messaging</li><li class="sc-li"><span class="sc-dot"></span>Targeted Digital Advertising</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-qr"/></svg></div>
-      <span class="sc-t">QR Code–Based Campaign Services</span>
-    </div>
-    <p class="sc-d">Smart QR code solutions for digital communication and public awareness enabling instant information access and paperless communication.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>QR Code Awareness Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Government Scheme Information Access</li><li class="sc-li"><span class="sc-dot"></span>Healthcare Information Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Educational Content Delivery</li><li class="sc-li"><span class="sc-dot"></span>Interactive Video Awareness Systems</li><li class="sc-li"><span class="sc-dot"></span>Prescription Pad QR Solutions</li><li class="sc-li"><span class="sc-dot"></span>Smart Information Access Systems</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-globe"/></svg></div>
-      <span class="sc-t">Google Ads &amp; Social Media Advertising</span>
-    </div>
-    <p class="sc-d">Online advertising campaigns across leading digital platforms ensuring targeted reach, cost efficiency, and real-time performance tracking.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>Google Ads Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Social Media Advertising</li><li class="sc-li"><span class="sc-dot"></span>Facebook &amp; Instagram Promotions</li><li class="sc-li"><span class="sc-dot"></span>YouTube Video Advertising</li><li class="sc-li"><span class="sc-dot"></span>Audience Targeting</li><li class="sc-li"><span class="sc-dot"></span>Campaign Analytics &amp; Optimization</li><li class="sc-li"><span class="sc-dot"></span>Lead Generation Campaigns</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-users"/></svg></div>
-      <span class="sc-t">Influencer &amp; Celebrity Advertising</span>
-    </div>
-    <p class="sc-d">Connecting brands and government campaigns with trusted influencers and celebrities to amplify message reach, trust, and credibility.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>Celebrity Endorsements</li><li class="sc-li"><span class="sc-dot"></span>Influencer Marketing Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Awareness Ambassador Programs</li><li class="sc-li"><span class="sc-dot"></span>Public Engagement Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Brand Promotion Activities</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-ivr"/></svg></div>
-      <span class="sc-t">IVR Call Services</span>
-    </div>
-    <p class="sc-d">Automated IVR (Interactive Voice Response) systems for mass communication ensuring wide reach, even in rural and remote areas.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>Bulk Voice Call Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Government Awareness Calls</li><li class="sc-li"><span class="sc-dot"></span>Election Awareness Calls</li><li class="sc-li"><span class="sc-dot"></span>Citizen Notification Services</li><li class="sc-li"><span class="sc-dot"></span>Emergency Messaging</li><li class="sc-li"><span class="sc-dot"></span>Feedback Collection Systems</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-atm"/></svg></div>
-      <span class="sc-t">White Label ATM Solutions</span>
-    </div>
-    <p class="sc-d">Deployment and promotion of White Label ATM services in partnership with financial networks to promote financial accessibility.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>White Label ATM Branding</li><li class="sc-li"><span class="sc-dot"></span>ATM Awareness Campaigns</li><li class="sc-li"><span class="sc-dot"></span>ATM Location Promotion</li><li class="sc-li"><span class="sc-dot"></span>Digital ATM Advertising</li><li class="sc-li"><span class="sc-dot"></span>Rural Financial Inclusion Campaigns</li></ul>
-  </div>
-  <div class="sc">
-    <div class="sc-h">
-      <div class="sc-ico"><svg width="20" height="20" style="color:var(--teal)"><use href="#ico-shield"/></svg></div>
-      <span class="sc-t">Insurance Services — Two &amp; Four Wheeler</span>
-    </div>
-    <p class="sc-d">Insurance facilitation services for vehicles through authorized partners ensuring quick processing, affordable plans, and customer convenience.</p>
-    <ul class="sc-ul"><li class="sc-li"><span class="sc-dot"></span>Two-Wheeler Insurance</li><li class="sc-li"><span class="sc-dot"></span>Four-Wheeler Insurance</li><li class="sc-li"><span class="sc-dot"></span>Insurance Renewals</li><li class="sc-li"><span class="sc-dot"></span>Policy Awareness Campaigns</li><li class="sc-li"><span class="sc-dot"></span>Claim Assistance Support</li></ul>
-  </div>
-</div>
   </div>
 </section>
 
-<!-- INDUSTRIES -->
-<section class="section alt" id="industries">
+<!-- ═══ INDUSTRIES ═══ -->
+<section class="section section-alt" id="industries">
   <div class="container">
     <div class="section-header">
-      <span class="label">Industries We Serve</span>
-      <h2 class="h2">Trusted Across Sectors</h2>
-      <p class="sub">Tailored communication strategies for each sector's unique needs and compliance requirements.</p>
+      <span class="section-label">Industries We Serve</span>
+      <h2 class="section-h2">Trusted Across Sectors</h2>
+      <p class="section-sub">Tailored communication strategies for each sector's unique needs and compliance requirements — government to retail, healthcare to finance.</p>
     </div>
-    <div class="ig" id="ig">
-  <div class="ic"><div class="ic-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-gov"/></svg></div><span class="ic-n">Government Departments</span></div>
-  <div class="ic"><div class="ic-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-hospital"/></svg></div><span class="ic-n">Healthcare Institutions</span></div>
-  <div class="ic"><div class="ic-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-grad"/></svg></div><span class="ic-n">Educational Institutions</span></div>
-  <div class="ic"><div class="ic-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-briefcase"/></svg></div><span class="ic-n">Corporate Companies</span></div>
-  <div class="ic"><div class="ic-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-heart"/></svg></div><span class="ic-n">NGOs &amp; Trusts</span></div>
-  <div class="ic"><div class="ic-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-vote"/></svg></div><span class="ic-n">Political Campaigns</span></div>
-  <div class="ic"><div class="ic-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-bank"/></svg></div><span class="ic-n">Financial Institutions</span></div>
-  <div class="ic"><div class="ic-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-shield"/></svg></div><span class="ic-n">Insurance Providers</span></div>
-  <div class="ic"><div class="ic-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-store"/></svg></div><span class="ic-n">Retail &amp; Commercial Businesses</span></div>
-</div>
-    <div class="ibanner">
-      <div class="ib-bar"></div>
-      <div class="ib-lbl">Platform Coverage</div>
+
+    <div class="industries-grid">
+      <div class="industry-card"><div class="industry-icon"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-building"/></svg></div><span class="industry-name">Government Departments</span></div>
+      <div class="industry-card"><div class="industry-icon"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-hospital"/></svg></div><span class="industry-name">Healthcare Institutions</span></div>
+      <div class="industry-card"><div class="industry-icon"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-grad"/></svg></div><span class="industry-name">Educational Institutions</span></div>
+      <div class="industry-card"><div class="industry-icon"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-briefcase"/></svg></div><span class="industry-name">Corporate Companies</span></div>
+      <div class="industry-card"><div class="industry-icon"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-heart"/></svg></div><span class="industry-name">NGOs &amp; Trusts</span></div>
+      <div class="industry-card"><div class="industry-icon"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-vote"/></svg></div><span class="industry-name">Political Campaigns</span></div>
+      <div class="industry-card"><div class="industry-icon"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-bank"/></svg></div><span class="industry-name">Financial Institutions</span></div>
+      <div class="industry-card"><div class="industry-icon"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-shield"/></svg></div><span class="industry-name">Insurance Providers</span></div>
+      <div class="industry-card"><div class="industry-icon"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-store"/></svg></div><span class="industry-name">Retail &amp; Commercial Businesses</span></div>
+    </div>
+
+    <div class="industry-banner">
+      <div class="industry-banner-bar"></div>
+      <div class="industry-banner-label">Platform Coverage</div>
       <h3>One Partner. Every Channel. Measurable Results.</h3>
-      <div class="itags">
-        <span class="itag">Digital</span><span class="itag">Print</span><span class="itag">Outdoor</span>
-        <span class="itag">IVR</span><span class="itag">LED Wall</span><span class="itag">Influencer</span>
-        <span class="itag">QR Code</span><span class="itag">ATM Media</span><span class="itag">Election Campaigns</span>
+      <div class="industry-tags">
+        <span class="industry-tag">Digital</span>
+        <span class="industry-tag">Print</span>
+        <span class="industry-tag">Outdoor</span>
+        <span class="industry-tag">IVR</span>
+        <span class="industry-tag">LED Wall</span>
+        <span class="industry-tag">Influencer</span>
+        <span class="industry-tag">QR Code</span>
+        <span class="industry-tag">ATM Media</span>
+        <span class="industry-tag">Election Campaigns</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHY US -->
+<!-- ═══ WHY CHOOSE US ═══ -->
 <section class="section" id="why">
   <div class="container">
     <div class="section-header">
-      <span class="label">Why Choose Us</span>
-      <h2 class="h2">Built for Impact. Backed by Trust.</h2>
-      <p class="sub">Deep sector expertise combined with technology-driven execution to deliver campaigns that achieve real, measurable results.</p>
+      <span class="section-label">Why Choose Us</span>
+      <h2 class="section-h2">Built for Impact. Backed by Trust.</h2>
+      <p class="section-sub">We deliver high-impact communication strategies that drive awareness, engagement, and measurable results — for government, corporate, and public sector clients.</p>
     </div>
-    <div class="wg" id="wg">
-  <div class="wc">
-    <div class="wc-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-layers"/></svg></div>
-    <h4>Comprehensive Advertising Solutions</h4>
-    <p>Integrated services covering planning, design, execution, distribution, monitoring, and reporting — all under one roof.</p>
-  </div>
-  <div class="wc">
-    <div class="wc-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-award"/></svg></div>
-    <h4>Government &amp; Corporate Campaign Expertise</h4>
-    <p>Proven experience managing high-impact campaigns for government departments, public sector organizations, and private institutions.</p>
-  </div>
-  <div class="wc">
-    <div class="wc-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-network"/></svg></div>
-    <h4>Multi-Platform Media Coverage</h4>
-    <p>Strategic presence across digital, print, outdoor, LED, IVR, and social media platforms for maximum reach.</p>
-  </div>
-  <div class="wc">
-    <div class="wc-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-cpu"/></svg></div>
-    <h4>Technology-Driven Communication</h4>
-    <p>Modern technology and data-driven strategies powering every campaign for measurable impact and public awareness.</p>
-  </div>
-  <div class="wc">
-    <div class="wc-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-trending"/></svg></div>
-    <h4>Professional Campaign Management</h4>
-    <p>End-to-end campaign lifecycle support with dedicated teams ensuring accurate messaging and wide reach.</p>
-  </div>
-  <div class="wc">
-    <div class="wc-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-chart"/></svg></div>
-    <h4>Transparent Reporting System</h4>
-    <p>Clear, real-time reporting on campaign performance, reach, and outcomes — ensuring full transparency with every client.</p>
-  </div>
-  <div class="wc">
-    <div class="wc-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-radio"/></svg></div>
-    <h4>Wide Network Reach</h4>
-    <p>Extensive media network covering urban and rural geographies for effective, inclusive public communication.</p>
-  </div>
-  <div class="wc">
-    <div class="wc-i"><svg width="22" height="22" style="color:var(--teal)"><use href="#ico-clock"/></svg></div>
-    <h4>Reliable Execution</h4>
-    <p>On-time, on-brief delivery of high-impact communication strategies that drive awareness, engagement, and measurable results.</p>
-  </div>
-</div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-layers"/></svg></div><h4>Comprehensive Advertising Solutions</h4><p>Integrated services covering planning, design, execution, distribution, monitoring, and reporting — all under one roof.</p></div>
+      <div class="why-card"><div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-award"/></svg></div><h4>Government &amp; Corporate Campaign Expertise</h4><p>Proven experience managing high-impact campaigns for government departments, public sector, and private institutions.</p></div>
+      <div class="why-card"><div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-network"/></svg></div><h4>Multi-Platform Media Coverage</h4><p>Strategic presence across digital, print, outdoor, LED, IVR, and social media platforms for maximum reach.</p></div>
+      <div class="why-card"><div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-cpu"/></svg></div><h4>Technology-Driven Communication</h4><p>Modern technology and data-driven strategies powering every campaign for measurable impact and public awareness.</p></div>
+      <div class="why-card"><div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-trending"/></svg></div><h4>Professional Campaign Management</h4><p>End-to-end campaign lifecycle support with dedicated teams ensuring accurate messaging and wide reach at every stage.</p></div>
+      <div class="why-card"><div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-chart"/></svg></div><h4>Transparent Reporting System</h4><p>Clear, real-time reporting on campaign performance, reach, and outcomes — full transparency with every client.</p></div>
+      <div class="why-card"><div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-radio"/></svg></div><h4>Wide Network Reach</h4><p>Extensive media network covering urban and rural geographies for effective, inclusive public communication.</p></div>
+      <div class="why-card"><div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-clock"/></svg></div><h4>Reliable Execution</h4><p>On-time, on-brief delivery of high-impact communication strategies that drive awareness, engagement, and measurable results.</p></div>
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ═══ CTA ═══ -->
 <section id="cta">
-  <div class="cta-bar"></div>
+  <div class="cta-top-bar"></div>
   <div class="cta-glow"></div>
-  <div class="cta-in">
+  <div class="cta-inner">
     <div class="cta-badge">Ready to Launch?</div>
-    <h2 class="cta-h2">Let's Build Your Next<br><em>High-Impact</em> Campaign</h2>
-    <p class="cta-s">Tailored campaigns designed for maximum reach and measurable impact. Partner with Visionary Ads for government outreach, corporate advertising, or public awareness — and get complete media and communication solutions built around your needs.</p>
+    <h2 class="cta-h2">Let's Build Your Next <em>High-Impact</em> Campaign</h2>
+    <p class="cta-sub">Tailored campaigns designed for maximum reach and measurable impact — from government outreach to corporate advertising and public awareness.</p>
+    <p class="cta-punch">"Complete media and communication solutions tailored to your needs."</p>
     <div class="cta-btns">
-      <button class="btn-t" onclick="go('contact')">Start a Campaign</button>
-      <button class="btn-g" onclick="go('services')">View All Services</button>
+      <button class="btn-teal"  onclick="go('contact')">Start a Campaign</button>
+      <button class="btn-ghost" onclick="go('services')">View All Services</button>
     </div>
     <div class="cta-stats">
-      <div style="text-align:center"><div class="csv">11+</div><div class="csl">Services</div></div>
-      <div style="text-align:center"><div class="csv">9+</div><div class="csl">Industries</div></div>
-      <div style="text-align:center"><div class="csv">360°</div><div class="csl">Coverage</div></div>
+      <div style="text-align:center"><div class="cta-stat-val">11+</div><div class="cta-stat-lbl">Services</div></div>
+      <div style="text-align:center"><div class="cta-stat-val">9+</div><div class="cta-stat-lbl">Industries</div></div>
+      <div style="text-align:center"><div class="cta-stat-val">360°</div><div class="cta-stat-lbl">Coverage</div></div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section alt" id="contact">
+<!-- ═══ CONTACT ═══ -->
+<section class="section section-alt" id="contact">
   <div class="container">
     <div class="section-header">
-      <span class="label">Contact Us</span>
-      <h2 class="h2">Let's Work Together</h2>
-      <p class="sub">For advertising partnerships, government outreach campaigns, or business promotions, Visionary Ads provides complete media and communication solutions tailored to your needs.</p>
+      <span class="section-label">Contact Us</span>
+      <h2 class="section-h2">Let's Work Together</h2>
+      <p class="section-sub">For advertising partnerships, government outreach campaigns, or business promotions — Visionary Ads provides complete media and communication solutions tailored to your needs.</p>
     </div>
-    <div class="cg">
+
+    <div class="contact-grid">
+      <!-- Info panel -->
       <div>
-        <div class="ci-card">
-          <div class="ci-bar"></div>
+        <div class="contact-info-card">
+          <div class="contact-info-bar"></div>
           <h3>Get in Touch</h3>
-          <div class="ci-list">
-            <div class="ci-item">
-              <div class="ci-ico"><svg width="18" height="18" style="color:#009B8D"><use href="#ico-phone"/></svg></div>
-              <div><div class="ci-lbl">Phone</div><div class="ci-val">90367 69330<br>99165 42789</div></div>
+          <div class="contact-info-list">
+            <div class="contact-info-item">
+              <div class="contact-info-ico"><svg width="17" height="17" style="color:#009B8D"><use href="#i-phone"/></svg></div>
+              <div><div class="contact-info-lbl">Phone</div><div class="contact-info-val">90367 69330<br>99165 42789</div></div>
             </div>
-            <div class="ci-item">
-              <div class="ci-ico"><svg width="18" height="18" style="color:#009B8D"><use href="#ico-mail"/></svg></div>
-              <div><div class="ci-lbl">Email</div><div class="ci-val">visionaryadss@gmail.com</div></div>
+            <div class="contact-info-item">
+              <div class="contact-info-ico"><svg width="17" height="17" style="color:#009B8D"><use href="#i-mail"/></svg></div>
+              <div><div class="contact-info-lbl">Email</div><div class="contact-info-val">visionaryadss@gmail.com</div></div>
             </div>
-            <div class="ci-item">
-              <div class="ci-ico"><svg width="18" height="18" style="color:#009B8D"><use href="#ico-globe"/></svg></div>
-              <div><div class="ci-lbl">Website</div><div class="ci-val">visionary-ads.odoo.com</div></div>
+            <div class="contact-info-item">
+              <div class="contact-info-ico"><svg width="17" height="17" style="color:#009B8D"><use href="#i-globe"/></svg></div>
+              <div><div class="contact-info-lbl">Website</div><div class="contact-info-val">visionary-ads.odoo.com</div></div>
             </div>
-            <div class="ci-item">
-              <div class="ci-ico"><svg width="18" height="18" style="color:#009B8D"><use href="#ico-pin"/></svg></div>
-              <div><div class="ci-lbl">Operations</div><div class="ci-val">India — PAN India Coverage</div></div>
+            <div class="contact-info-item">
+              <div class="contact-info-ico"><svg width="17" height="17" style="color:#009B8D"><use href="#i-pin"/></svg></div>
+              <div><div class="contact-info-lbl">Operations</div><div class="contact-info-val">India — PAN India Coverage</div></div>
             </div>
           </div>
+          <div class="contact-authority">Complete media and communication solutions tailored to your needs — government, corporate, or public sector.</div>
         </div>
-        <div class="ctags-c">
-          <div class="ctags-l">We Serve</div>
-          <div class="ctags">
-            <span class="ctag">Government</span><span class="ctag">Healthcare</span>
-            <span class="ctag">Education</span><span class="ctag">Corporate</span>
-            <span class="ctag">NGOs</span><span class="ctag">Finance</span>
+        <div class="contact-tags-card">
+          <div class="contact-tags-lbl">We Serve</div>
+          <div class="contact-tags">
+            <span class="contact-tag">Government</span>
+            <span class="contact-tag">Healthcare</span>
+            <span class="contact-tag">Education</span>
+            <span class="contact-tag">Corporate</span>
+            <span class="contact-tag">NGOs</span>
+            <span class="contact-tag">Finance</span>
           </div>
         </div>
       </div>
-      <div class="fcard">
+
+      <!-- Form -->
+      <div class="form-card">
         <form id="cform" onsubmit="submitForm(event)">
-          <div class="frow">
-            <div class="fg n0"><label class="flbl">Full Name</label><input class="finput" type="text" placeholder="Your name" required/></div>
-            <div class="fg n0"><label class="flbl">Email Address</label><input class="finput" type="email" placeholder="your@email.com" required/></div>
+          <div class="form-row">
+            <div class="form-group no-top">
+              <label class="form-label">Full Name</label>
+              <input class="form-input" type="text" placeholder="Your full name" required/>
+            </div>
+            <div class="form-group no-top">
+              <label class="form-label">Email Address</label>
+              <input class="form-input" type="email" placeholder="your@email.com" required/>
+            </div>
           </div>
-          <div class="fg"><label class="flbl">Phone Number</label><input class="finput" type="tel" placeholder="+91 XXXXX XXXXX"/></div>
-          <div class="fg"><label class="flbl">Subject</label><input class="finput" type="text" placeholder="e.g. Government Campaign Inquiry" required/></div>
-          <div class="fg"><label class="flbl">Message</label><textarea class="ftarea" placeholder="Tell us about your campaign needs..." required></textarea></div>
-          <button type="submit" class="fsub">Send Message</button>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <input class="form-input" type="text" placeholder="e.g. Government Campaign Inquiry" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell us about your campaign requirements..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
         </form>
-        <div class="sstate" id="ss">
-          <div class="ss-i"><svg width="28" height="28" style="color:var(--teal)"><use href="#ico-check"/></svg></div>
-          <div class="ss-t">Message Sent</div>
-          <p class="ss-s">Thank you for reaching out to Visionary Ads.<br>Our team will get back to you shortly.</p>
+        <div class="success-state" id="ss">
+          <div class="success-ico"><svg width="28" height="28" style="color:var(--teal)"><use href="#i-check"/></svg></div>
+          <div class="success-title">Message Sent</div>
+          <p class="success-sub">Thank you for reaching out to Visionary Ads.<br>Our team will respond to you shortly.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
-  <div class="ft-bar"></div>
+  <div class="footer-top-bar"></div>
   <div class="container">
-    <div class="ft-grid">
+    <div class="footer-grid">
       <div>
-        <div class="ft-logo">
-          <img src="logo.png" alt="Visionary Ads" style="height:38px;width:auto;object-fit:contain;display:block"/>
-          <div><div class="ft-ln">Visionary Ads</div><div class="ft-lt">Advertising Beyond Boundaries</div></div>
+        <div class="footer-logo">
+          <img src="logo.png" alt="Visionary Ads" style="height:36px;width:auto;object-fit:contain;display:block;"/>
+          <div>
+            <div class="footer-brand-name">Visionary Ads</div>
+            <div class="footer-brand-tag">Advertising Beyond Boundaries</div>
+          </div>
         </div>
-        <p class="ft-desc">End-to-end advertising solutions for government, corporate, and public sector campaigns across India. Multi-platform. Measurable. Trusted.</p>
-        <div class="ft-soc">
-          <div class="fsoc"><svg width="16" height="16" style="color:#8A9BA8"><use href="#ico-fb"/></svg></div>
-          <div class="fsoc"><svg width="16" height="16" style="color:#8A9BA8"><use href="#ico-ig"/></svg></div>
-          <div class="fsoc"><svg width="16" height="16" style="color:#8A9BA8"><use href="#ico-yt"/></svg></div>
-          <div class="fsoc"><svg width="16" height="16" style="color:#8A9BA8"><use href="#ico-li"/></svg></div>
+        <p class="footer-desc">End-to-end advertising solutions for government, corporate, and public sector campaigns across India. Multi-platform. Transparent. Measurable.</p>
+        <div class="footer-socials">
+          <div class="footer-social"><svg width="15" height="15" style="color:#8A9BA8"><use href="#i-fb"/></svg></div>
+          <div class="footer-social"><svg width="15" height="15" style="color:#8A9BA8"><use href="#i-ig"/></svg></div>
+          <div class="footer-social"><svg width="15" height="15" style="color:#8A9BA8"><use href="#i-yt"/></svg></div>
+          <div class="footer-social"><svg width="15" height="15" style="color:#8A9BA8"><use href="#i-li"/></svg></div>
         </div>
       </div>
       <div>
         <h4>Quick Links</h4>
-        <ul class="ftlinks">
-          <li><button class="ftl" onclick="go('home')">Home</button></li>
-          <li><button class="ftl" onclick="go('about')">About</button></li>
-          <li><button class="ftl" onclick="go('services')">Services</button></li>
-          <li><button class="ftl" onclick="go('industries')">Industries</button></li>
-          <li><button class="ftl" onclick="go('contact')">Contact</button></li>
+        <ul class="footer-links">
+          <li><button class="footer-link" onclick="go('home')">Home</button></li>
+          <li><button class="footer-link" onclick="go('about')">About</button></li>
+          <li><button class="footer-link" onclick="go('services')">Services</button></li>
+          <li><button class="footer-link" onclick="go('industries')">Industries</button></li>
+          <li><button class="footer-link" onclick="go('contact')">Contact</button></li>
         </ul>
       </div>
       <div>
         <h4>Our Services</h4>
-        <ul class="ftlinks">
-          <li><button class="ftl" onclick="go('services')">Government Advertising</button></li>
-          <li><button class="ftl" onclick="go('services')">LED &amp; Digital Screens</button></li>
-          <li><button class="ftl" onclick="go('services')">Print Media</button></li>
-          <li><button class="ftl" onclick="go('services')">Outdoor Media</button></li>
-          <li><button class="ftl" onclick="go('services')">Election Campaigns</button></li>
-          <li><button class="ftl" onclick="go('services')">Google &amp; Social Ads</button></li>
+        <ul class="footer-links">
+          <li><button class="footer-link" onclick="go('services')">Government Advertising</button></li>
+          <li><button class="footer-link" onclick="go('services')">LED &amp; Digital Screens</button></li>
+          <li><button class="footer-link" onclick="go('services')">Print Media</button></li>
+          <li><button class="footer-link" onclick="go('services')">Outdoor Media</button></li>
+          <li><button class="footer-link" onclick="go('services')">Election Campaigns</button></li>
+          <li><button class="footer-link" onclick="go('services')">Google &amp; Social Ads</button></li>
         </ul>
       </div>
       <div>
         <h4>Contact</h4>
-        <div class="ftci">
-          <div class="ftci-r"><svg width="14" height="14" style="color:#8A9BA8;flex-shrink:0;margin-top:2px"><use href="#ico-phone"/></svg><span>90367 69330 | 99165 42789</span></div>
-          <div class="ftci-r"><svg width="14" height="14" style="color:#8A9BA8;flex-shrink:0;margin-top:2px"><use href="#ico-mail"/></svg><a href="mailto:visionaryadss@gmail.com">visionaryadss@gmail.com</a></div>
-          <div class="ftci-r"><svg width="14" height="14" style="color:#8A9BA8;flex-shrink:0;margin-top:2px"><use href="#ico-globe"/></svg><a href="https://visionary-ads.odoo.com" target="_blank">visionary-ads.odoo.com</a></div>
-          <div class="ftci-r"><svg width="14" height="14" style="color:#8A9BA8;flex-shrink:0;margin-top:2px"><use href="#ico-pin"/></svg><span>India — PAN India Operations</span></div>
+        <div class="footer-contact-list">
+          <div class="footer-contact-row"><svg width="13" height="13" style="color:#8A9BA8;flex-shrink:0;margin-top:2px"><use href="#i-phone"/></svg><span>90367 69330 &nbsp;|&nbsp; 99165 42789</span></div>
+          <div class="footer-contact-row"><svg width="13" height="13" style="color:#8A9BA8;flex-shrink:0;margin-top:2px"><use href="#i-mail"/></svg><a href="mailto:visionaryadss@gmail.com">visionaryadss@gmail.com</a></div>
+          <div class="footer-contact-row"><svg width="13" height="13" style="color:#8A9BA8;flex-shrink:0;margin-top:2px"><use href="#i-globe"/></svg><a href="https://visionary-ads.odoo.com" target="_blank">visionary-ads.odoo.com</a></div>
+          <div class="footer-contact-row"><svg width="13" height="13" style="color:#8A9BA8;flex-shrink:0;margin-top:2px"><use href="#i-pin"/></svg><span>India — PAN India Operations</span></div>
         </div>
       </div>
     </div>
-    <div class="ft-bot">
-      <span class="ft-copy">© 2025 Visionary Ads. All rights reserved.</span>
-      <div class="ft-leg"><span>Privacy Policy</span><span>Terms of Service</span></div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Visionary Ads. All rights reserved.</span>
+      <div class="footer-legal"><span>Privacy Policy</span><span>Terms of Service</span></div>
     </div>
   </div>
 </footer>
 
 <script>
-// Content is rendered as static HTML — no JS data needed
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
 
-// Content rendered as static HTML above
-
-// ── NAV SCROLL ──
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));
-
-// ── SCROLL TO ──
-function go(id){
-  const el=document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth'});
+function go(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
   document.getElementById('mmenu').classList.remove('open');
   document.getElementById('hbg').classList.remove('open');
 }
 
-// ── HAMBURGER ──
-function toggleMenu(){
+function toggleMenu() {
   document.getElementById('mmenu').classList.toggle('open');
   document.getElementById('hbg').classList.toggle('open');
 }
 
-// ── FORM ──
-function submitForm(e){
+function submitForm(e) {
   e.preventDefault();
-  document.getElementById('cform').style.display='none';
-  document.getElementById('ss').style.display='block';
-  setTimeout(()=>{
-    document.getElementById('cform').style.display='block';
-    document.getElementById('ss').style.display='none';
+  document.getElementById('cform').style.display = 'none';
+  document.getElementById('ss').style.display   = 'block';
+  setTimeout(() => {
+    document.getElementById('cform').style.display = 'block';
+    document.getElementById('ss').style.display   = 'none';
     document.getElementById('cform').reset();
-  },5000);
+  }, 5000);
 }
 </script>
 </body>
