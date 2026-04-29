@@ -658,6 +658,9 @@ footer { background: #111; color: #fff; padding: 0; }
   .process-steps  { grid-template-columns: repeat(4, 1fr); }
   .footer-grid    { grid-template-columns: 1fr 1fr; }
   .process-outcomes { grid-template-columns: 1fr; }
+  /* 5-col grids → 3 col on medium */
+  [style*="repeat(5,1fr)"] { grid-template-columns: repeat(3, 1fr) !important; }
+  [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
 }
 @media (max-width: 768px) {
   .container      { padding: 0 24px; }
@@ -753,6 +756,8 @@ footer { background: #111; color: #fff; padding: 0; }
       <div class="nav-links">
         <button class="nav-link" onclick="go('about')">About</button>
         <button class="nav-link" onclick="go('services')">Services</button>
+        <button class="nav-link" onclick="go('strengths')">Strengths</button>
+        <button class="nav-link" onclick="go('clients')">Clients</button>
         <button class="nav-link" onclick="go('industries')">Industries</button>
         <button class="nav-link" onclick="go('contact')">Contact</button>
         <button class="nav-cta"  onclick="go('contact')">Get in Touch</button>
@@ -765,6 +770,8 @@ footer { background: #111; color: #fff; padding: 0; }
   <div class="mobile-menu" id="mmenu">
     <button class="mobile-link" onclick="go('about')">About</button>
     <button class="mobile-link" onclick="go('services')">Services</button>
+    <button class="mobile-link" onclick="go('strengths')">Strengths</button>
+    <button class="mobile-link" onclick="go('clients')">Clients</button>
     <button class="mobile-link" onclick="go('industries')">Industries</button>
     <button class="mobile-link" onclick="go('contact')">Contact</button>
     <button class="mobile-cta"  onclick="go('contact')">Get in Touch</button>
@@ -841,7 +848,7 @@ footer { background: #111; color: #fff; padding: 0; }
     <div class="section-header">
       <span class="section-label">About Us</span>
       <h2 class="section-h2">India's Trusted Advertising Partner</h2>
-      <p class="section-sub">VisionaryAds delivers end-to-end media and campaign solutions for government, public sector, and corporate clients — powered by modern technology and data-driven strategies.</p>
+      <p class="section-sub">Driving Communication. Delivering Impact. Creating Visibility — end-to-end advertising and media solutions combining traditional and digital platforms to create meaningful engagement and widespread awareness.</p>
     </div>
 
     <div class="about-grid">
@@ -849,7 +856,7 @@ footer { background: #111; color: #fff; padding: 0; }
       <div class="about-who">
         <div class="about-who-ico"><svg width="22" height="22" style="color:#fff"><use href="#i-target"/></svg></div>
         <h3>Who We Are</h3>
-        <p>A full-service advertising company specializing in high-impact campaigns using modern technology, data-driven strategies, and multi-platform media networks — connecting governments, businesses, and communities through innovative communication systems that deliver measurable impact, transparency, and public awareness.</p>
+        <p>A multi-service advertising and outreach partner committed to transforming communication through modern technology and professional media solutions. Our team works closely with clients to design campaigns that are impactful, measurable, and aligned with organizational goals — executed at local, regional, and national levels.</p>
         <div class="about-who-stats">
           <div><div class="stat-big-val">360°</div><div class="stat-big-lbl">Campaign Coverage</div></div>
           <div><div class="stat-big-val">End-to-End</div><div class="stat-big-lbl">Service Model</div></div>
@@ -1194,6 +1201,168 @@ footer { background: #111; color: #fff; padding: 0; }
   </div>
 </section>
 
+<!-- ═══ OUR STRENGTHS ═══ -->
+<section class="section section-alt" id="strengths">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Strengths</span>
+      <h2 class="section-h2">What Sets Us Apart</h2>
+      <p class="section-sub">Our strength lies in strategic planning, creative execution, and reliable delivery — ensuring every message reaches the intended audience with clarity and impact.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-layers"/></svg></div>
+        <h4>Integrated Communication Solutions</h4>
+        <p>Multiple advertising platforms under one roof — seamless campaign execution across digital, print, and outdoor media without switching vendors.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-cpu"/></svg></div>
+        <h4>Technology-Driven Approach</h4>
+        <p>QR code systems, digital displays, automated IVR platforms, and targeted digital advertising technologies integrated into every campaign.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-building"/></svg></div>
+        <h4>Government &amp; Public Outreach Expertise</h4>
+        <p>Specialized experience in public welfare, healthcare, education, elections, and social development awareness campaigns at scale.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-target"/></svg></div>
+        <h4>Customized Strategies</h4>
+        <p>Every campaign is designed to match the client's specific objectives, target audience, and communication goals — no one-size-fits-all approach.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-clock"/></svg></div>
+        <h4>Reliable Execution</h4>
+        <p>Timely delivery, professional management, and transparent reporting throughout the full campaign lifecycle from brief to results.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-chart"/></svg></div>
+        <h4>Measurable Outcomes</h4>
+        <p>Result-driven campaigns with clear performance metrics — every rupee spent is tracked, reported, and optimized for maximum impact.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-network"/></svg></div>
+        <h4>Local to National Reach</h4>
+        <p>Campaigns executed at local, regional, and national levels — with the network and infrastructure to scale as your needs grow.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-ico"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-users"/></svg></div>
+        <h4>Collaborative Partnership</h4>
+        <p>We work closely with clients and partners to align strategies, share progress, and achieve shared success at every stage.</p>
+      </div>
+    </div>
+
+    <!-- Core Values strip -->
+    <div class="process-strip" style="margin-top:28px;">
+      <p class="section-label" style="display:block;text-align:center;margin-bottom:20px;">Our Core Values</p>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;">
+        <div class="outcome-box"><div class="outcome-title">Integrity</div><div class="outcome-desc">Honesty, transparency, and ethical practices in all operations.</div></div>
+        <div class="outcome-box"><div class="outcome-title">Innovation</div><div class="outcome-desc">Continuously adopting new technologies and creative communication solutions.</div></div>
+        <div class="outcome-box"><div class="outcome-title">Quality</div><div class="outcome-desc">Campaigns that meet professional and industry standards consistently.</div></div>
+        <div class="outcome-box"><div class="outcome-title">Commitment</div><div class="outcome-desc">Focused on measurable results and long-term client satisfaction.</div></div>
+        <div class="outcome-box"><div class="outcome-title">Collaboration</div><div class="outcome-desc">Working closely with clients and partners to achieve shared success.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OUR CLIENTS ═══ -->
+<section class="section" id="clients">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Clients</span>
+      <h2 class="section-h2">Trusted by Leading Organizations</h2>
+      <p class="section-sub">We are proud to work with organizations that believe in the power of smart, impactful communication to serve communities and drive public awareness.</p>
+    </div>
+
+    <!-- BMTC featured client -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;">
+      <div class="about-card" style="border-left:4px solid var(--teal);display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:72px;height:72px;border-radius:10px;border:2px dashed var(--border);background:var(--off-white);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;">
+            <img src="bmtc-logo.png" alt="BMTC Logo" style="width:100%;height:100%;object-fit:contain;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div style="display:none;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;">
+              <svg width="20" height="20" style="color:var(--muted)"><use href="#i-building"/></svg>
+              <span style="font-size:8px;color:var(--muted);margin-top:4px;text-align:center;line-height:1.3;">Client<br>Logo</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:var(--head);">BMTC</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;">Bangalore Metropolitan Transport Corporation</div>
+          </div>
+        </div>
+        <p style="font-size:14px;color:var(--text);line-height:1.75;">Currently partnering with BMTC to deploy QR code-based communication systems across their transit network — enabling instant passenger information access, digital service updates, and paperless public communication at scale.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="contact-tag">QR Code Systems</span>
+          <span class="contact-tag">Transit Communication</span>
+          <span class="contact-tag">Public Awareness</span>
+          <span class="contact-tag">Digital Information</span>
+        </div>
+      </div>
+
+      <div class="about-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:2px dashed var(--border);box-shadow:none;background:var(--off-white);">
+        <div style="width:72px;height:72px;border-radius:10px;border:2px dashed var(--border);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:14px;">
+          <svg width="22" height="22" style="color:var(--muted)"><use href="#i-users"/></svg>
+          <span style="font-size:8px;color:var(--muted);margin-top:4px;line-height:1.3;">Your<br>Logo</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:var(--head);margin-bottom:8px;">Your Organization</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;">We are actively expanding our client partnerships. Reach out to explore how Visionary Ads can serve your communication needs.</p>
+      </div>
+    </div>
+
+    <!-- Commitment statement -->
+    <div class="industry-banner">
+      <div class="industry-banner-bar"></div>
+      <div class="industry-banner-label">Our Commitment to Excellence</div>
+      <h3>Strong Communication Builds Strong Communities</h3>
+      <p style="font-size:15px;opacity:.8;max-width:640px;margin:0 auto;line-height:1.8;position:relative;">We are committed to delivering innovative, reliable, and impactful advertising solutions — combining creativity, technology, and strategic thinking to help organizations communicate effectively with their audiences.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WORK PROCESS ═══ -->
+<section class="section section-alt" id="process">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">How We Work</span>
+      <h2 class="section-h2">Our Work Process</h2>
+      <p class="section-sub">A structured, result-oriented approach — from understanding your requirements to delivering transparent, measurable campaign outcomes.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;">
+      <div class="why-card" style="text-align:center;">
+        <div class="why-card-ico" style="margin:0 auto 16px;"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-search"/></svg></div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;">Step 01</div>
+        <h4>Understanding Requirements</h4>
+        <p>Assess campaign objectives, target audience, and communication goals.</p>
+      </div>
+      <div class="why-card" style="text-align:center;">
+        <div class="why-card-ico" style="margin:0 auto 16px;"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-map"/></svg></div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;">Step 02</div>
+        <h4>Strategic Planning</h4>
+        <p>Develop customized media and outreach strategies tailored to your goals.</p>
+      </div>
+      <div class="why-card" style="text-align:center;">
+        <div class="why-card-ico" style="margin:0 auto 16px;"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-pen"/></svg></div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;">Step 03</div>
+        <h4>Creative Development</h4>
+        <p>Design engaging content and professional campaign materials for each platform.</p>
+      </div>
+      <div class="why-card" style="text-align:center;">
+        <div class="why-card-ico" style="margin:0 auto 16px;"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-rocket"/></svg></div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;">Step 04</div>
+        <h4>Campaign Execution</h4>
+        <p>Implement campaigns across selected platforms efficiently and on schedule.</p>
+      </div>
+      <div class="why-card" style="text-align:center;">
+        <div class="why-card-ico" style="margin:0 auto 16px;"><svg width="22" height="22" style="color:var(--teal)"><use href="#i-chart"/></svg></div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;">Step 05</div>
+        <h4>Monitoring &amp; Reporting</h4>
+        <p>Track campaign performance and provide transparent, real-time updates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ CTA ═══ -->
 <section id="cta">
   <div class="cta-top-bar"></div>
@@ -1224,7 +1393,7 @@ footer { background: #111; color: #fff; padding: 0; }
       <p class="section-sub">For advertising partnerships, government outreach campaigns, or business promotions — Visionary Ads provides complete media and communication solutions tailored to your needs.</p>
     </div>
 
-    <div class="contact-grid">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:0 auto;">
       <!-- Info panel -->
       <div>
         <div class="contact-info-card">
@@ -1250,7 +1419,10 @@ footer { background: #111; color: #fff; padding: 0; }
           </div>
           <div class="contact-authority">Complete media and communication solutions tailored to your needs — government, corporate, or public sector.</div>
         </div>
-        <div class="contact-tags-card">
+      </div>
+      <!-- We Serve -->
+      <div>
+        <div class="contact-tags-card" style="height:100%;">
           <div class="contact-tags-lbl">We Serve</div>
           <div class="contact-tags">
             <span class="contact-tag">Government</span>
@@ -1259,41 +1431,10 @@ footer { background: #111; color: #fff; padding: 0; }
             <span class="contact-tag">Corporate</span>
             <span class="contact-tag">NGOs</span>
             <span class="contact-tag">Finance</span>
+            <span class="contact-tag">Insurance</span>
+            <span class="contact-tag">Political Campaigns</span>
+            <span class="contact-tag">Retail &amp; Commercial</span>
           </div>
-        </div>
-      </div>
-
-      <!-- Form -->
-      <div class="form-card">
-        <form id="cform" onsubmit="submitForm(event)">
-          <div class="form-row">
-            <div class="form-group no-top">
-              <label class="form-label">Full Name</label>
-              <input class="form-input" type="text" placeholder="Your full name" required/>
-            </div>
-            <div class="form-group no-top">
-              <label class="form-label">Email Address</label>
-              <input class="form-input" type="email" placeholder="your@email.com" required/>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Phone Number</label>
-            <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX"/>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Subject</label>
-            <input class="form-input" type="text" placeholder="e.g. Government Campaign Inquiry" required/>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Message</label>
-            <textarea class="form-textarea" placeholder="Tell us about your campaign requirements..." required></textarea>
-          </div>
-          <button type="submit" class="form-submit">Send Message</button>
-        </form>
-        <div class="success-state" id="ss">
-          <div class="success-ico"><svg width="28" height="28" style="color:var(--teal)"><use href="#i-check"/></svg></div>
-          <div class="success-title">Message Sent</div>
-          <p class="success-sub">Thank you for reaching out to Visionary Ads.<br>Our team will respond to you shortly.</p>
         </div>
       </div>
     </div>
@@ -1376,16 +1517,6 @@ function toggleMenu() {
   document.getElementById('hbg').classList.toggle('open');
 }
 
-function submitForm(e) {
-  e.preventDefault();
-  document.getElementById('cform').style.display = 'none';
-  document.getElementById('ss').style.display   = 'block';
-  setTimeout(() => {
-    document.getElementById('cform').style.display = 'block';
-    document.getElementById('ss').style.display   = 'none';
-    document.getElementById('cform').reset();
-  }, 5000);
-}
 </script>
 </body>
 </html>
