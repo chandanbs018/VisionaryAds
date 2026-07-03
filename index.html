@@ -377,6 +377,36 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
 
 .ring-pulse{animation:ringExpand 2s ease-out infinite;}
 @keyframes ringExpand{0%{transform:scale(1);opacity:.8;}100%{transform:scale(2.2);opacity:0;}}
+/* ─── WATER BOTTLE IMAGE ZOOM ─── */
+.wb-img-wrap{
+  position:relative;cursor:crosshair;
+  background:#fff;border-radius:16px;
+  border:1px solid rgba(30,202,184,0.2);
+}
+.wb-img{
+  width:100%;height:auto;display:block;border-radius:16px;
+  object-fit:contain;
+}
+.wb-label{
+  text-align:center;font-family:'Nunito',sans-serif;font-size:12px;
+  font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:.08em;
+  text-transform:uppercase;margin-top:10px;padding-bottom:4px;
+}
+.wb-lens{
+  position:absolute;width:120px;height:120px;border-radius:50%;
+  border:2.5px solid var(--teal);
+  box-shadow:0 0 0 2px rgba(30,202,184,0.25),0 4px 20px rgba(0,0,0,0.25);
+  pointer-events:none;display:none;z-index:10;
+}
+.wb-zoom-box{
+  position:absolute;width:260px;height:210px;border-radius:14px;
+  border:2px solid var(--teal);
+  box-shadow:0 12px 48px rgba(0,0,0,0.45);
+  overflow:hidden;pointer-events:none;display:none;z-index:20;
+  background:#fff;top:0;left:calc(100% + 16px);
+}
+@media(max-width:900px){.wb-zoom-box,.wb-lens{display:none!important;}}
+
 @media(max-width:1024px){.wg{grid-template-columns:repeat(2,1fr);}.proc-grid{grid-template-columns:repeat(3,1fr);}.ft-grid{grid-template-columns:1fr 1fr;}.core-vals{grid-template-columns:repeat(3,1fr);}.psteps{grid-template-columns:repeat(4,1fr);}.hero-inner{grid-template-columns:1fr;}.hero-illus{display:none;}}
 @media(max-width:768px){.container{padding:0 20px;}.section{padding:56px 0;}.nav-links{display:none;}.hbg{display:flex;}.sg{grid-template-columns:1fr 1fr;}.ig{grid-template-columns:1fr 1fr;}.about-grid{grid-template-columns:1fr;}.about-cards{grid-template-columns:1fr;}.clients-grid{grid-template-columns:1fr;}.contact-grid{grid-template-columns:1fr;}.ft-grid{grid-template-columns:1fr 1fr;}.psteps{grid-template-columns:repeat(3,1fr);}.core-vals{grid-template-columns:repeat(2,1fr);}.proc-grid{grid-template-columns:repeat(2,1fr);}.form-row{grid-template-columns:1fr;}}
 @media(max-width:520px){.container{padding:0 16px;}.section{padding:44px 0;}.sg,.ig,.wg{grid-template-columns:1fr;}.ft-grid{grid-template-columns:1fr;}.core-vals{grid-template-columns:repeat(2,1fr);}.proc-grid{grid-template-columns:1fr;}.psteps{grid-template-columns:repeat(2,1fr);}}
@@ -974,55 +1004,49 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
 <div id="page-waterbottle" class="page" style="padding-top:68px;">
 
   <!-- HERO BANNER -->
-  <div style="background:var(--navy);padding:64px 0;position:relative;overflow:hidden;">
+  <div style="background:var(--navy);padding:64px 0 48px;position:relative;overflow:hidden;">
     <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--teal);"></div>
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 20% 50%,rgba(30,202,184,0.1),transparent 60%);pointer-events:none;"></div>
     <div class="container" style="position:relative;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
-        <!-- Left text -->
-        <div>
-          <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:50px;background:rgba(30,202,184,0.12);border:1px solid rgba(30,202,184,0.3);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;font-family:'Nunito',sans-serif;">
-            <span style="width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;"></span>New Service
-          </div>
-          <h1 style="font-family:'Nunito',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:900;color:#fff;line-height:1.08;margin-bottom:16px;">Free Water Bottle<br><span style="color:var(--teal);">Advertising</span></h1>
-          <p style="font-size:17px;line-height:1.85;color:rgba(255,255,255,0.7);margin-bottom:28px;max-width:440px;">Refresh People. Promote Your Brand. Transform a simple water bottle into a powerful advertising medium that travels with your audience all day.</p>
-          <button class="btn-teal" onclick="openModal()">Get a Custom Proposal</button>
+      <!-- Top: heading + subtext -->
+      <div style="text-align:center;margin-bottom:44px;">
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:50px;background:rgba(30,202,184,0.12);border:1px solid rgba(30,202,184,0.3);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;font-family:'Nunito',sans-serif;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;"></span>New Service
         </div>
-        <!-- Right: 3 image placeholders -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <!-- Large left image -->
-          <div style="grid-row:span 2;border-radius:18px;overflow:hidden;border:2px dashed rgba(30,202,184,0.3);background:rgba(255,255,255,0.04);min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
-            <img src="image1.png" alt="Water Bottle Campaign 1" style="width:100%;height:100%;object-fit:cover;border-radius:16px;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-            <div style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:20px;text-align:center;width:100%;height:100%;">
-              <div style="width:52px;height:52px;border-radius:12px;background:rgba(30,202,184,0.15);border:1px solid rgba(30,202,184,0.3);display:flex;align-items:center;justify-content:center;">
-                <svg width="24" height="24" style="color:var(--teal)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              </div>
-              <span style="font-size:11px;color:rgba(255,255,255,0.4);font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Photo 1</span>
-              <span style="font-size:10px;color:rgba(255,255,255,0.25);">image1.png</span>
-            </div>
-          </div>
-          <!-- Top right image -->
-          <div style="border-radius:18px;overflow:hidden;border:2px dashed rgba(30,202,184,0.3);background:rgba(255,255,255,0.04);min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-            <img src="image2.png" alt="Water Bottle Campaign 2" style="width:100%;height:100%;object-fit:cover;border-radius:16px;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-            <div style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:16px;text-align:center;width:100%;height:100%;">
-              <div style="width:40px;height:40px;border-radius:10px;background:rgba(30,202,184,0.15);border:1px solid rgba(30,202,184,0.3);display:flex;align-items:center;justify-content:center;">
-                <svg width="18" height="18" style="color:var(--teal)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              </div>
-              <span style="font-size:10px;color:rgba(255,255,255,0.4);font-weight:600;text-transform:uppercase;letter-spacing:.1em;">Photo 2</span>
-            </div>
-          </div>
-          <!-- Bottom right image -->
-          <div style="border-radius:18px;overflow:hidden;border:2px dashed rgba(30,202,184,0.3);background:rgba(255,255,255,0.04);min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-            <img src="image3.png" alt="Water Bottle Campaign 3" style="width:100%;height:100%;object-fit:cover;border-radius:16px;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-            <div style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:16px;text-align:center;width:100%;height:100%;">
-              <div style="width:40px;height:40px;border-radius:10px;background:rgba(30,202,184,0.15);border:1px solid rgba(30,202,184,0.3);display:flex;align-items:center;justify-content:center;">
-                <svg width="18" height="18" style="color:var(--teal)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              </div>
-              <span style="font-size:10px;color:rgba(255,255,255,0.4);font-weight:600;text-transform:uppercase;letter-spacing:.1em;">Photo 3</span>
-            </div>
-          </div>
-        </div>
+        <h1 style="font-family:'Nunito',sans-serif;font-size:clamp(28px,4vw,50px);font-weight:900;color:#fff;line-height:1.08;margin-bottom:14px;">Free Water Bottle <span style="color:var(--teal);">Advertising</span></h1>
+        <p style="font-size:17px;line-height:1.85;color:rgba(255,255,255,0.65);max-width:560px;margin:0 auto 28px;">Refresh People. Promote Your Brand. Transform a simple water bottle into a powerful advertising medium that travels with your audience all day.</p>
+        <button class="btn-teal" onclick="openModal()">Get a Custom Proposal</button>
       </div>
+
+      <!-- 3 Images in a row — full image visible, zoom on hover -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+        <!-- Image 1 -->
+        <div class="wb-img-wrap" data-zoom="image1.jpeg">
+          <img src="image1.jpeg" alt="Branded Water Bottles" class="wb-img"/>
+          <div class="wb-lens" id="lens1"></div>
+          <div class="wb-zoom-box" id="zoom1"></div>
+          <div class="wb-label">Custom Branded Bottles</div>
+        </div>
+
+        <!-- Image 2 -->
+        <div class="wb-img-wrap" data-zoom="image2.jpeg">
+          <img src="image2.jpeg" alt="Eco Bottle Types" class="wb-img"/>
+          <div class="wb-lens" id="lens2"></div>
+          <div class="wb-zoom-box" id="zoom2"></div>
+          <div class="wb-label">Eco-Friendly Bottle Types</div>
+        </div>
+
+        <!-- Image 3 -->
+        <div class="wb-img-wrap" data-zoom="image3.jpeg">
+          <img src="image3.jpeg" alt="Bottle Materials" class="wb-img"/>
+          <div class="wb-lens" id="lens3"></div>
+          <div class="wb-zoom-box" id="zoom3"></div>
+          <div class="wb-label">Premium Material Options</div>
+        </div>
+
+      </div>
+      <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:14px;font-style:italic;">Hover over any image to zoom in</p>
     </div>
   </div>
 
@@ -1342,6 +1366,54 @@ function selectTab(el){
   document.querySelectorAll('.step-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
 }
+document.querySelectorAll('.wb-img-wrap').forEach((wrap, i) => {
+  const img   = wrap.querySelector('.wb-img');
+  const lens  = wrap.querySelector('.wb-lens');
+  const zbox  = wrap.querySelector('.wb-zoom-box');
+  const ZOOM  = 2.5;
+  const LENS_W = 120, LENS_H = 120;
+
+  function activate() {
+    if (!img.complete || img.naturalWidth === 0) return;
+    lens.style.display = 'block';
+    zbox.style.display = 'block';
+    zbox.style.backgroundImage   = `url('${img.src}')`;
+    zbox.style.backgroundRepeat  = 'no-repeat';
+    const zw = img.offsetWidth  * ZOOM;
+    const zh = img.offsetHeight * ZOOM;
+    zbox.style.backgroundSize = `${zw}px ${zh}px`;
+  }
+  function deactivate() {
+    lens.style.display = 'none';
+    zbox.style.display = 'none';
+  }
+  function move(e) {
+    if (zbox.style.display === 'none') return;
+    const r   = img.getBoundingClientRect();
+    const cx  = (e.clientX ?? e.touches[0].clientX) - r.left;
+    const cy  = (e.clientY ?? e.touches[0].clientY) - r.top;
+    const lx  = Math.min(Math.max(cx - LENS_W/2, 0), img.offsetWidth  - LENS_W);
+    const ly  = Math.min(Math.max(cy - LENS_H/2, 0), img.offsetHeight - LENS_H);
+    lens.style.left = lx + 'px';
+    lens.style.top  = ly + 'px';
+    // position zoom box: right of wrap if space, else left
+    const wrapR = wrap.getBoundingClientRect();
+    const spaceRight = window.innerWidth - wrapR.right;
+    if (spaceRight >= 280) {
+      zbox.style.left = 'calc(100% + 16px)';
+      zbox.style.right = 'auto';
+    } else {
+      zbox.style.right = 'calc(100% + 16px)';
+      zbox.style.left  = 'auto';
+    }
+    zbox.style.top = Math.min(ly, img.offsetHeight - 210) + 'px';
+    zbox.style.backgroundPosition = `-${lx * ZOOM}px -${ly * ZOOM}px`;
+  }
+  wrap.addEventListener('mouseenter', activate);
+  wrap.addEventListener('mouseleave', deactivate);
+  wrap.addEventListener('mousemove',  move);
+});
+
 </script>
 </body>
 </html>
