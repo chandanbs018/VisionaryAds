@@ -382,10 +382,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
   position:relative;cursor:crosshair;
   background:#fff;border-radius:16px;
   border:1px solid rgba(30,202,184,0.2);
+  overflow:hidden;
 }
 .wb-img{
-  width:100%;height:auto;display:block;border-radius:16px;
-  object-fit:contain;
+  width:100%;height:auto;display:block;
+  object-fit:fill;
+  border-radius:0;
 }
 .wb-label{
   text-align:center;font-family:'Nunito',sans-serif;font-size:12px;
@@ -1019,11 +1021,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
       </div>
 
       <!-- 3 Images in a row — full image visible, zoom on hover -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start;">
 
         <!-- Image 1 -->
         <div class="wb-img-wrap" data-zoom="image1.jpeg">
-          <img src="image1.jpeg" alt="Branded Water Bottles" class="wb-img"/>
+          <img src="image1.jpeg" alt="Branded Water Bottles" class="wb-img" style="width:100%;height:280px;object-fit:cover;display:block;"/>
           <div class="wb-lens" id="lens1"></div>
           <div class="wb-zoom-box" id="zoom1"></div>
           <div class="wb-label">Custom Branded Bottles</div>
@@ -1031,7 +1033,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
 
         <!-- Image 2 -->
         <div class="wb-img-wrap" data-zoom="image2.jpeg">
-          <img src="image2.jpeg" alt="Eco Bottle Types" class="wb-img"/>
+          <img src="image2.jpeg" alt="Eco Bottle Types" class="wb-img" style="width:100%;height:280px;object-fit:cover;display:block;"/>
           <div class="wb-lens" id="lens2"></div>
           <div class="wb-zoom-box" id="zoom2"></div>
           <div class="wb-label">Eco-Friendly Bottle Types</div>
@@ -1039,7 +1041,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
 
         <!-- Image 3 -->
         <div class="wb-img-wrap" data-zoom="image3.jpeg">
-          <img src="image3.jpeg" alt="Bottle Materials" class="wb-img"/>
+          <img src="image3.jpeg" alt="Bottle Materials" class="wb-img" style="width:100%;height:280px;object-fit:cover;display:block;"/>
           <div class="wb-lens" id="lens3"></div>
           <div class="wb-zoom-box" id="zoom3"></div>
           <div class="wb-label">Premium Material Options</div>
@@ -1366,47 +1368,46 @@ function selectTab(el){
   document.querySelectorAll('.step-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
 }
-document.querySelectorAll('.wb-img-wrap').forEach((wrap, i) => {
-  const img   = wrap.querySelector('.wb-img');
-  const lens  = wrap.querySelector('.wb-lens');
-  const zbox  = wrap.querySelector('.wb-zoom-box');
-  const ZOOM  = 2.5;
+document.querySelectorAll('.wb-img-wrap').forEach((wrap) => {
+  const img    = wrap.querySelector('.wb-img');
+  const lens   = wrap.querySelector('.wb-lens');
+  const zbox   = wrap.querySelector('.wb-zoom-box');
+  const ZOOM   = 2.8;
   const LENS_W = 120, LENS_H = 120;
 
   function activate() {
-    if (!img.complete || img.naturalWidth === 0) return;
     lens.style.display = 'block';
     zbox.style.display = 'block';
-    zbox.style.backgroundImage   = `url('${img.src}')`;
-    zbox.style.backgroundRepeat  = 'no-repeat';
-    const zw = img.offsetWidth  * ZOOM;
-    const zh = img.offsetHeight * ZOOM;
-    zbox.style.backgroundSize = `${zw}px ${zh}px`;
+    zbox.style.backgroundImage  = `url('${img.src}')`;
+    zbox.style.backgroundRepeat = 'no-repeat';
+    // use getBoundingClientRect for accurate rendered size
+    const r = img.getBoundingClientRect();
+    zbox.style.backgroundSize = `${r.width * ZOOM}px ${r.height * ZOOM}px`;
   }
   function deactivate() {
     lens.style.display = 'none';
     zbox.style.display = 'none';
   }
   function move(e) {
-    if (zbox.style.display === 'none') return;
-    const r   = img.getBoundingClientRect();
-    const cx  = (e.clientX ?? e.touches[0].clientX) - r.left;
-    const cy  = (e.clientY ?? e.touches[0].clientY) - r.top;
-    const lx  = Math.min(Math.max(cx - LENS_W/2, 0), img.offsetWidth  - LENS_W);
-    const ly  = Math.min(Math.max(cy - LENS_H/2, 0), img.offsetHeight - LENS_H);
+    if(zbox.style.display === 'none') return;
+    const r  = img.getBoundingClientRect();
+    const cx = e.clientX - r.left;
+    const cy = e.clientY - r.top;
+    const lx = Math.min(Math.max(cx - LENS_W/2, 0), r.width  - LENS_W);
+    const ly = Math.min(Math.max(cy - LENS_H/2, 0), r.height - LENS_H);
     lens.style.left = lx + 'px';
     lens.style.top  = ly + 'px';
-    // position zoom box: right of wrap if space, else left
-    const wrapR = wrap.getBoundingClientRect();
-    const spaceRight = window.innerWidth - wrapR.right;
-    if (spaceRight >= 280) {
-      zbox.style.left = 'calc(100% + 16px)';
+    // zoom box: right if space, else left
+    const wrapRect = wrap.getBoundingClientRect();
+    if(window.innerWidth - wrapRect.right >= 280){
+      zbox.style.left  = 'calc(100% + 16px)';
       zbox.style.right = 'auto';
     } else {
       zbox.style.right = 'calc(100% + 16px)';
       zbox.style.left  = 'auto';
     }
-    zbox.style.top = Math.min(ly, img.offsetHeight - 210) + 'px';
+    const maxTop = r.height - 210;
+    zbox.style.top = Math.min(Math.max(ly - 45, 0), maxTop > 0 ? maxTop : 0) + 'px';
     zbox.style.backgroundPosition = `-${lx * ZOOM}px -${ly * ZOOM}px`;
   }
   wrap.addEventListener('mouseenter', activate);
