@@ -412,9 +412,248 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
 }
 @media(max-width:900px){.wb-zoom-box,.wb-lens{display:none!important;}}
 
-@media(max-width:1024px){.wg{grid-template-columns:repeat(2,1fr);}.proc-grid{grid-template-columns:repeat(3,1fr);}.ft-grid{grid-template-columns:1fr 1fr;}.core-vals{grid-template-columns:repeat(3,1fr);}.psteps{grid-template-columns:repeat(4,1fr);}.hero-inner{grid-template-columns:1fr;}.hero-illus{display:none;}}
-@media(max-width:768px){.container{padding:0 20px;}.section{padding:56px 0;}.nav-links{display:none;}.hbg{display:flex;}.sg{grid-template-columns:1fr 1fr;}.ig{grid-template-columns:1fr 1fr;}.about-grid{grid-template-columns:1fr;}.about-cards{grid-template-columns:1fr;}.clients-grid{grid-template-columns:1fr;}.contact-grid{grid-template-columns:1fr;}.ft-grid{grid-template-columns:1fr 1fr;}.psteps{grid-template-columns:repeat(3,1fr);}.core-vals{grid-template-columns:repeat(2,1fr);}.proc-grid{grid-template-columns:repeat(2,1fr);}.form-row{grid-template-columns:1fr;}}
-@media(max-width:520px){.container{padding:0 16px;}.section{padding:44px 0;}.sg,.ig,.wg{grid-template-columns:1fr;}.ft-grid{grid-template-columns:1fr;}.core-vals{grid-template-columns:repeat(2,1fr);}.proc-grid{grid-template-columns:1fr;}.psteps{grid-template-columns:repeat(2,1fr);}}
+/* ── TABLET 1024px ── */
+@media(max-width:1024px){
+  .wg{grid-template-columns:repeat(2,1fr);}
+  .proc-grid{grid-template-columns:repeat(3,1fr);}
+  .ft-grid{grid-template-columns:1fr 1fr;}
+  .core-vals{grid-template-columns:repeat(3,1fr);}
+  .psteps{grid-template-columns:repeat(4,1fr);}
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-illus{display:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-cards{grid-template-columns:1fr 1fr;}
+  .sg{grid-template-columns:repeat(2,1fr);}
+  .ig{grid-template-columns:repeat(2,1fr);}
+  .clients-grid{grid-template-columns:1fr 1fr;}
+  .contact-grid{grid-template-columns:1fr 1fr;}
+  .pouts{grid-template-columns:1fr 1fr;}
+}
+
+/* ── TABLET / LARGE PHONE 768px ── */
+@media(max-width:768px){
+  /* Layout */
+  .container{padding:0 18px;}
+  .section{padding:52px 0;}
+
+  /* Nav */
+  .nav-links{display:none;}
+  .hbg{display:flex;}
+  .nav-inner{min-height:60px;}
+  .logo-name{font-size:14px;}
+  .logo-tag{font-size:7.5px;}
+  .logo img{height:38px!important;}
+
+  /* Hero */
+  .hero{padding:52px 0 36px;}
+  .hero-h1{font-size:clamp(28px,7vw,40px);}
+  .hero-sub{font-size:15px;}
+  .hero-sub-bold{font-size:14px;}
+  .hero-stat{font-size:14px;}
+  .hero-cta-wrap{flex-direction:column;gap:10px;}
+  .hero-cta-wrap .btn-teal,.hero-cta-wrap .btn-outline{width:100%;justify-content:center;text-align:center;}
+  .btn-hero-cta{max-width:100%;}
+
+  /* Grids → 1 column */
+  .sg{grid-template-columns:1fr 1fr;}
+  .ig{grid-template-columns:1fr 1fr;}
+  .wg{grid-template-columns:1fr 1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-cards{grid-template-columns:1fr;}
+  .clients-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .proc-grid{grid-template-columns:repeat(2,1fr);}
+  .psteps{grid-template-columns:repeat(2,1fr);}
+  .core-vals{grid-template-columns:repeat(2,1fr);}
+  .pouts{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+
+  /* Footer */
+  .ft-grid{grid-template-columns:1fr 1fr;}
+  .ft-bot{flex-direction:column;align-items:center;text-align:center;gap:8px;}
+
+  /* Water bottle images */
+  .wb-img{height:220px!important;}
+
+  /* Step tabs */
+  .step-tabs-row{flex-direction:column;align-items:center;}
+  .step-tab{width:100%;max-width:340px;text-align:center;}
+
+  /* Benefits */
+  .benefit-item{flex-direction:column;gap:14px;}
+  .benefit-ico{width:54px;height:54px;}
+  .benefit-title{font-size:15px;}
+  .benefit-desc{font-size:14px;}
+
+  /* About who card stats */
+  .aws{grid-template-columns:1fr 1fr;}
+
+  /* Section headings */
+  .section-h2{font-size:clamp(22px,5vw,32px);}
+
+  /* Waterbottle hero grid → stack */
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:20px"]{
+    grid-template-columns:1fr!important;
+  }
+
+  /* Water bottle services+perfectfor 2col → 1col */
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:28px"]{
+    grid-template-columns:1fr!important;
+  }
+
+  /* About grid 2col inline → 1col */
+  div[style*="grid-template-columns:1fr 2fr"]{
+    grid-template-columns:1fr!important;
+  }
+
+  /* CTA stats */
+  .cta-stats{max-width:100%;}
+
+  /* Modal */
+  .modal-box{padding:28px 20px;margin:12px;}
+
+  /* Process strip steps text */
+  .pst-lbl{font-size:10px;}
+
+  /* Waterbottle hero inner */
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:56px"]{
+    grid-template-columns:1fr!important;
+    gap:28px!important;
+  }
+}
+
+/* ── PHONE 520px ── */
+@media(max-width:520px){
+  /* Layout */
+  .container{padding:0 14px;}
+  .section{padding:40px 0;}
+
+  /* Nav */
+  .logo-name{font-size:13px;}
+  .logo-tag{display:none;}
+  .logo img{height:34px!important;}
+  .nav-cta{font-size:12px;padding:8px 14px;}
+
+  /* Hero */
+  .hero{padding:40px 0 28px;}
+  .hero-h1{font-size:clamp(26px,8vw,36px);}
+  .hero-badge{font-size:10px;padding:5px 12px;}
+  .btn-hero-cta{font-size:13px;padding:14px 18px;}
+
+  /* All grids → 1 col */
+  .sg,.ig,.wg{grid-template-columns:1fr;}
+  .proc-grid{grid-template-columns:1fr;}
+  .psteps{grid-template-columns:repeat(2,1fr);}
+  .core-vals{grid-template-columns:1fr 1fr;}
+  .clients-grid{grid-template-columns:1fr;}
+  .ft-grid{grid-template-columns:1fr;}
+  .about-cards{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+
+  /* Section headings */
+  .section-h2{font-size:clamp(20px,6vw,28px);}
+  .section-sub{font-size:14px;}
+
+  /* Cards padding */
+  .sc{padding:20px 16px;}
+  .wc{padding:18px 14px;}
+  .acard{padding:20px 16px;}
+  .psc{padding:16px 12px;}
+  .ic{padding:14px 14px;}
+
+  /* Buttons */
+  .btn-teal,.btn-outline{padding:12px 22px;font-size:13px;}
+  .cta-btns{flex-direction:column;align-items:center;}
+  .cta-btns .btn-teal,.cta-btns .btn-outline{width:100%;max-width:300px;justify-content:center;}
+
+  /* Modal */
+  .modal-box{padding:22px 16px;border-radius:16px;}
+  .modal-title{font-size:18px;}
+  .form-input,.form-textarea,.form-select{font-size:14px;padding:11px 13px;}
+
+  /* Water bottle images */
+  .wb-img{height:180px!important;}
+
+  /* Pstrip steps */
+  .psteps{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .pst-ico{width:34px;height:34px;}
+
+  /* About who card */
+  .about-who{padding:24px 18px;}
+  .about-who h3{font-size:18px;}
+
+  /* Footer */
+  .ft-grid{grid-template-columns:1fr;}
+  .ft-bot{flex-direction:column;align-items:center;text-align:center;}
+  .ft-leg{flex-wrap:wrap;justify-content:center;gap:12px;}
+
+  /* Hero stats */
+  .hero-stats{gap:5px;}
+  .hero-stat{font-size:13px;}
+
+  /* Benefit items */
+  .benefit-item{flex-direction:column;gap:12px;}
+  .benefit-ico{width:48px;height:48px;}
+  .benefit-title{font-size:14px;}
+
+  /* Step tabs */
+  .step-tab{padding:12px 18px;font-size:12px;}
+
+  /* CTA section */
+  .cta-wrap{padding:52px 0;}
+  .cta-h2{font-size:clamp(20px,6vw,30px);}
+  .cta-stats{grid-template-columns:repeat(3,1fr);}
+  .cs-val{font-size:20px;}
+
+  /* Clients commit banner */
+  .commit-banner{padding:28px 18px;}
+  .commit-banner h3{font-size:18px;}
+
+  /* Contact serve card tags */
+  .serve-tag{font-size:11px;padding:6px 11px;}
+
+  /* WB page why-it-works 4col → 1col */
+  div[style*="grid-template-columns:repeat(4,1fr)"]{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  /* WB images 2col → 1col */
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:20px"]{
+    grid-template-columns:1fr!important;
+  }
+
+  /* WB services+perfect for */
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:28px"]{
+    grid-template-columns:1fr!important;
+  }
+
+  /* Industries banner tags */
+  .itag{font-size:11px;padding:6px 13px;}
+
+  /* Process outcomes */
+  .pouts{grid-template-columns:1fr;}
+
+  /* WhatsApp button */
+  .wa-float{width:48px;height:48px;bottom:18px;right:18px;}
+  .wa-float svg{width:24px;height:24px;}
+  .wa-pulse-ring{width:48px;height:48px;}
+
+  /* Nav CTA button - hide text on very small */
+  .nav-cta{padding:8px 12px;font-size:11px;}
+}
+
+/* ── VERY SMALL PHONES 380px ── */
+@media(max-width:380px){
+  .container{padding:0 12px;}
+  .hero-h1{font-size:24px;}
+  .section-h2{font-size:20px;}
+  .logo-name{font-size:12px;}
+  .psteps{grid-template-columns:1fr 1fr;}
+  .core-vals{grid-template-columns:1fr 1fr;}
+  .sc,.wc{padding:16px 12px;}
+  .ic{padding:12px;}
+  .btn-teal,.btn-outline{font-size:12px;padding:11px 18px;}
+}
 </style>
 </head>
 <body>
@@ -1114,6 +1353,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
             <span class="serve-tag">Product Launches</span>
             <span class="serve-tag">Govt Awareness Campaigns</span>
             <span class="serve-tag">Health Awareness Programs</span>
+            <span class="serve-tag">Healthcare &amp; Hospitals</span>
+            <span class="serve-tag">Beauty Industry</span>
             <span class="serve-tag">Election Campaigns</span>
             <span class="serve-tag">Corporate Events</span>
             <span class="serve-tag">Trade Shows</span>
@@ -1167,7 +1408,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
           <div class="ci-list">
             <div class="ci-item"><div class="ci-ico"><svg width="15" height="15" style="color:var(--teal)"><use href="#i-phone"/></svg></div><div><div class="ci-lbl">Phone</div><div class="ci-val">90367 69330<br>99165 42789</div></div></div>
             <div class="ci-item"><div class="ci-ico"><svg width="15" height="15" style="color:var(--teal)"><use href="#i-mail"/></svg></div><div><div class="ci-lbl">Email</div><div class="ci-val">visionaryadss@gmail.com</div></div></div>
-            <div class="ci-item"><div class="ci-ico"><svg width="15" height="15" style="color:var(--teal)"><use href="#i-globe"/></svg></div><div><div class="ci-lbl">Website</div><div class="ci-val">visionaryadss.in</div></div></div>
+            <div class="ci-item"><div class="ci-ico"><svg width="15" height="15" style="color:var(--teal)"><use href="#i-globe"/></svg></div><div><div class="ci-lbl">Website</div><div class="ci-val"><a href="https://www.visionaryadss.in" target="_blank" style="color:var(--navy);text-decoration:none;">www.visionaryadss.in</a></div></div></div>
             <div class="ci-item"><div class="ci-ico"><svg width="15" height="15" style="color:var(--teal)"><use href="#i-pin"/></svg></div><div><div class="ci-lbl">Operations</div><div class="ci-val">India — PAN India Coverage</div></div></div>
           </div>
           <div class="ci-authority">Complete media and communication solutions tailored to your needs — government, corporate, or public sector.</div>
@@ -1277,7 +1518,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
         <div class="ftci">
           <div class="ftci-r"><svg width="11" height="11" style="color:var(--teal);flex-shrink:0;margin-top:2px"><use href="#i-phone"/></svg><span>90367 69330 | 99165 42789</span></div>
           <div class="ftci-r"><svg width="11" height="11" style="color:var(--teal);flex-shrink:0;margin-top:2px"><use href="#i-mail"/></svg><a href="mailto:visionaryadss@gmail.com">visionaryadss@gmail.com</a></div>
-          <div class="ftci-r"><svg width="11" height="11" style="color:var(--teal);flex-shrink:0;margin-top:2px"><use href="#i-globe"/></svg><a href="https://visionaryadss.in/" target="_blank">visionaryadss.in</a></div>
+          <div class="ftci-r"><svg width="11" height="11" style="color:var(--teal);flex-shrink:0;margin-top:2px"><use href="#i-globe"/></svg><a href="https://www.visionaryadss.in" target="_blank">www.visionaryadss.in</a></div>
           <div class="ftci-r"><svg width="11" height="11" style="color:var(--teal);flex-shrink:0;margin-top:2px"><use href="#i-pin"/></svg><span>India — PAN India Operations</span></div>
         </div>
       </div>
