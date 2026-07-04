@@ -485,26 +485,27 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
     <div class="modal-title">Send Us an Enquiry</div>
     <div class="modal-sub">Tell us about your campaign needs. Our team will get back to you within 24 hours.</div>
     <form id="enquiry-form" onsubmit="submitEnquiry(event)">
-      <input type="hidden" name="access_key" value="35081a10-3d47-483e-9f05-871c786d64e0"/>
+      <input type="hidden" name="access_key" value="d6291ed2-c17b-4c2b-a850-fe1f84c7a26c"/>
       <input type="hidden" name="subject" value="New Enquiry — Visionary Ads Website"/>
       <input type="hidden" name="from_name" value="Visionary Ads Website"/>
+      <input type="hidden" name="redirect" value="false"/>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Full Name *</label>
-          <input class="form-input" type="text" placeholder="Your name" required/>
+          <input class="form-input" type="text" name="name" placeholder="Your name" required/>
         </div>
         <div class="form-group">
           <label class="form-label">Phone Number *</label>
-          <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX" required/>
+          <input class="form-input" type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required/>
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Email Address *</label>
-        <input class="form-input" type="email" placeholder="your@email.com" required/>
+        <input class="form-input" type="email" name="email" placeholder="your@email.com" required/>
       </div>
       <div class="form-group">
         <label class="form-label">Service Interested In</label>
-        <select class="form-select">
+        <select class="form-select" name="service">
           <option value="">— Select a service —</option>
           <option>Government Advertising Solutions</option>
           <option>LED Wall &amp; Digital Screen Advertising</option>
@@ -522,7 +523,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
       </div>
       <div class="form-group">
         <label class="form-label">Message</label>
-        <textarea class="form-textarea" placeholder="Tell us about your campaign requirements, target audience, or any specific needs..."></textarea>
+        <textarea class="form-textarea" name="message" placeholder="Tell us about your campaign requirements, target audience, or any specific needs..."></textarea>
       </div>
       <button type="submit" class="form-submit">Send Enquiry</button>
     </form>
@@ -1183,19 +1184,20 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
           <h2 class="section-h2" style="font-size:28px;">Send Us a <span class="teal">Message</span></h2>
         </div>
         <form id="contact-form" onsubmit="submitContact(event)" style="background:#fff;border-radius:20px;padding:32px;box-shadow:var(--shadow);border:1px solid rgba(26,29,59,.07);">
-          <input type="hidden" name="access_key" value="35081a10-3d47-483e-9f05-871c786d64e0"/>
+          <input type="hidden" name="access_key" value="d6291ed2-c17b-4c2b-a850-fe1f84c7a26c"/>
           <input type="hidden" name="subject" value="New Message — Visionary Ads Contact Page"/>
           <input type="hidden" name="from_name" value="Visionary Ads Website"/>
+          <input type="hidden" name="redirect" value="false"/>
           <div class="form-row">
-            <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" placeholder="Your name" required/></div>
-            <div class="form-group"><label class="form-label">Phone Number *</label><input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX" required/></div>
+            <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" name="name" placeholder="Your name" required/></div>
+            <div class="form-group"><label class="form-label">Phone Number *</label><input class="form-input" type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required/></div>
           </div>
-          <div class="form-group"><label class="form-label">Email Address *</label><input class="form-input" type="email" placeholder="your@email.com" required/></div>
+          <div class="form-group"><label class="form-label">Email Address *</label><input class="form-input" type="email" name="email" placeholder="your@email.com" required/></div>
           <div class="form-group">
             <label class="form-label">Service Interested In</label>
-            <select class="form-select"><option value="">— Select a service —</option><option>Government Advertising Solutions</option><option>LED Wall &amp; Digital Screen Advertising</option><option>Print Media Advertising</option><option>Outdoor Media Advertising</option><option>Digital Election Campaign Solutions</option><option>QR Code–Based Campaign Services</option><option>Google Ads &amp; Social Media Advertising</option><option>Influencer &amp; Celebrity Advertising</option><option>IVR Call Services</option><option>White Label ATM Solutions</option><option>Insurance Services</option><option>Other / General Inquiry</option></select>
+            <select class="form-select" name="service"><option value="">— Select a service —</option><option>Government Advertising Solutions</option><option>LED Wall &amp; Digital Screen Advertising</option><option>Print Media Advertising</option><option>Outdoor Media Advertising</option><option>Digital Election Campaign Solutions</option><option>QR Code–Based Campaign Services</option><option>Google Ads &amp; Social Media Advertising</option><option>Influencer &amp; Celebrity Advertising</option><option>IVR Call Services</option><option>White Label ATM Solutions</option><option>Insurance Services</option><option>Other / General Inquiry</option></select>
           </div>
-          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell us about your campaign requirements..."></textarea></div>
+          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" name="message" placeholder="Tell us about your campaign requirements..."></textarea></div>
           <button type="submit" class="form-submit">Send Message</button>
           <div id="contact-success" style="display:none;text-align:center;padding:20px;margin-top:16px;background:var(--teal-l);border-radius:12px;border:1px solid var(--teal-b);">
             <div style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:var(--teal);">Message Sent!</div>
