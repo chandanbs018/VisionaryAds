@@ -381,12 +381,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
 .wb-img-wrap{
   position:relative;cursor:crosshair;
   border-radius:16px;overflow:hidden;
-  border:1px solid rgba(30,202,184,0.2);
+  border:2px solid rgba(30,202,184,0.25);
   line-height:0;
+  padding:6px;
+  background:rgba(255,255,255,0.06);
 }
 .wb-img{
-  width:100%;height:340px;display:block;
-  object-fit:cover;
+  width:100%;height:360px;display:block;
+  object-fit:cover;border-radius:12px;
 }
 .wb-label{
   text-align:center;font-family:'Nunito',sans-serif;font-size:12px;
@@ -394,17 +396,19 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
   text-transform:uppercase;margin-top:10px;padding-bottom:4px;
 }
 .wb-lens{
-  position:absolute;width:120px;height:120px;border-radius:50%;
+  position:absolute;width:130px;height:130px;border-radius:50%;
   border:2.5px solid var(--teal);
   box-shadow:0 0 0 2px rgba(30,202,184,0.25),0 4px 20px rgba(0,0,0,0.25);
   pointer-events:none;display:none;z-index:10;
+  background:rgba(30,202,184,0.06);
+  transform:translate(-6px,-6px);
 }
 .wb-zoom-box{
-  position:absolute;width:260px;height:210px;border-radius:14px;
+  position:absolute;width:300px;height:240px;border-radius:14px;
   border:2px solid var(--teal);
-  box-shadow:0 12px 48px rgba(0,0,0,0.45);
-  overflow:hidden;pointer-events:none;display:none;z-index:20;
-  background:#fff;top:0;left:calc(100% + 16px);
+  box-shadow:0 12px 48px rgba(0,0,0,0.5);
+  overflow:hidden;pointer-events:none;display:none;z-index:100;
+  background:#fff;top:0;left:calc(100% + 12px);
 }
 @media(max-width:900px){.wb-zoom-box,.wb-lens{display:none!important;}}
 
@@ -481,6 +485,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
     <div class="modal-title">Send Us an Enquiry</div>
     <div class="modal-sub">Tell us about your campaign needs. Our team will get back to you within 24 hours.</div>
     <form id="enquiry-form" onsubmit="submitEnquiry(event)">
+      <input type="hidden" name="access_key" value="35081a10-3d47-483e-9f05-871c786d64e0"/>
+      <input type="hidden" name="subject" value="New Enquiry — Visionary Ads Website"/>
+      <input type="hidden" name="from_name" value="Visionary Ads Website"/>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Full Name *</label>
@@ -1020,18 +1027,18 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
       </div>
 
       <!-- 2 Images in a row — full image visible, zoom on hover -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;overflow:visible;">
 
         <!-- Image 1 -->
-        <div class="wb-img-wrap" data-zoom="image1.jpeg">
-          <img src="image1.jpeg" alt="Branded Water Bottles" class="wb-img" style="width:100%;height:340px;object-fit:cover;display:block;"/>
+        <div class="wb-img-wrap" style="overflow:visible;" data-zoom="image1.jpeg">
+          <img src="image1.jpeg" alt="Branded Water Bottles" class="wb-img" style="width:100%;height:360px;object-fit:cover;display:block;border-radius:12px;"/>
           <div class="wb-lens" id="lens1"></div>
           <div class="wb-zoom-box" id="zoom1"></div>
         </div>
 
         <!-- Image 2 -->
-        <div class="wb-img-wrap" data-zoom="image2.jpeg">
-          <img src="image2.jpeg" alt="Eco Bottle Types" class="wb-img" style="width:100%;height:340px;object-fit:cover;display:block;"/>
+        <div class="wb-img-wrap" style="overflow:visible;" data-zoom="image2.jpeg">
+          <img src="image2.jpeg" alt="Eco Bottle Types" class="wb-img" style="width:100%;height:360px;object-fit:cover;display:block;border-radius:12px;"/>
           <div class="wb-lens" id="lens2"></div>
           <div class="wb-zoom-box" id="zoom2"></div>
         </div>
@@ -1176,6 +1183,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
           <h2 class="section-h2" style="font-size:28px;">Send Us a <span class="teal">Message</span></h2>
         </div>
         <form id="contact-form" onsubmit="submitContact(event)" style="background:#fff;border-radius:20px;padding:32px;box-shadow:var(--shadow);border:1px solid rgba(26,29,59,.07);">
+          <input type="hidden" name="access_key" value="35081a10-3d47-483e-9f05-871c786d64e0"/>
+          <input type="hidden" name="subject" value="New Message — Visionary Ads Contact Page"/>
+          <input type="hidden" name="from_name" value="Visionary Ads Website"/>
           <div class="form-row">
             <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" placeholder="Your name" required/></div>
             <div class="form-group"><label class="form-label">Phone Number *</label><input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX" required/></div>
@@ -1286,124 +1296,166 @@ footer{background:var(--bg2);border-top:1px solid var(--border);}
 </button>
 
 <script>
-/* ─── SPLASH ─── */
-window.addEventListener('load',()=>{
-  setTimeout(()=>document.getElementById('splash').classList.add('out'), 2400);
+/* ── SPLASH ── */
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('splash').classList.add('out');
+  }, 2400);
 });
 
-/* ─── TAB NAVIGATION ─── */
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('.nav-link[data-page]').forEach(l=>{
-    l.classList.toggle('active', l.dataset.page===id);
+/* ── TAB NAVIGATION ── */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-link[data-page]').forEach(function(l) {
+    l.classList.toggle('active', l.dataset.page === id);
   });
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   document.getElementById('mmenu').classList.remove('open');
   document.getElementById('hbg').classList.remove('open');
 }
 
-/* ─── NAV SCROLL ─── */
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('scrolled',scrollY>20);
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll', function() {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
 });
 
-/* ─── HAMBURGER ─── */
-function toggleMenu(){
+/* ── HAMBURGER ── */
+function toggleMenu() {
   document.getElementById('mmenu').classList.toggle('open');
   document.getElementById('hbg').classList.toggle('open');
 }
 
-/* ─── MODAL ─── */
-function openModal(){
+/* ── MODAL ── */
+function openModal() {
   document.getElementById('modal').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
-function closeModal(){
+function closeModal() {
   document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow='';
-  // reset form
-  document.getElementById('enquiry-form').style.display='block';
-  document.getElementById('success-msg').style.display='none';
+  document.body.style.overflow = '';
+  document.getElementById('enquiry-form').style.display = 'block';
+  document.getElementById('success-msg').style.display = 'none';
   document.getElementById('enquiry-form').reset();
 }
-document.getElementById('modal').addEventListener('click',function(e){
-  if(e.target===this) closeModal();
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
 
-/* ─── ENQUIRY FORM SUBMIT ─── */
-function submitEnquiry(e){
+/* ── ENQUIRY MODAL SUBMIT — Web3Forms ── */
+async function submitEnquiry(e) {
   e.preventDefault();
-  document.getElementById('enquiry-form').style.display='none';
-  document.getElementById('success-msg').style.display='block';
-  setTimeout(()=>{closeModal();},4000);
+  var form = document.getElementById('enquiry-form');
+  var btn  = form.querySelector('.form-submit');
+  var orig = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    var res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
+    var data = await res.json();
+    if (res.ok && data.success) {
+      form.style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      setTimeout(function() { closeModal(); }, 4000);
+    } else {
+      alert('Error: ' + (data.message || 'Please try again.'));
+    }
+  } catch (err) {
+    alert('Network error. Please check your connection and try again.');
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
 }
 
-/* ─── CONTACT PAGE FORM ─── */
-function submitContact(e){
+/* ── CONTACT PAGE SUBMIT — Web3Forms ── */
+async function submitContact(e) {
   e.preventDefault();
-  e.target.querySelector('.form-submit').style.display='none';
-  document.getElementById('contact-success').style.display='block';
-  setTimeout(()=>{
-    e.target.querySelector('.form-submit').style.display='block';
-    document.getElementById('contact-success').style.display='none';
-    e.target.reset();
-  },5000);
+  var form = e.target;
+  var btn  = form.querySelector('.form-submit');
+  var orig = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    var res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
+    var data = await res.json();
+    if (res.ok && data.success) {
+      btn.style.display = 'none';
+      document.getElementById('contact-success').style.display = 'block';
+      form.reset();
+      setTimeout(function() {
+        btn.style.display = 'block';
+        document.getElementById('contact-success').style.display = 'none';
+      }, 5000);
+    } else {
+      alert('Error: ' + (data.message || 'Please try again.'));
+    }
+  } catch (err) {
+    alert('Network error. Please check your connection and try again.');
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
 }
 
-/* ─── STEP TABS ─── */
-function selectTab(el){
-  document.querySelectorAll('.step-tab').forEach(t=>t.classList.remove('active'));
+/* ── STEP TABS ── */
+function selectTab(el) {
+  document.querySelectorAll('.step-tab').forEach(function(t) { t.classList.remove('active'); });
   el.classList.add('active');
 }
-document.querySelectorAll('.wb-img-wrap').forEach((wrap) => {
-  const img    = wrap.querySelector('.wb-img');
-  const lens   = wrap.querySelector('.wb-lens');
-  const zbox   = wrap.querySelector('.wb-zoom-box');
-  const ZOOM   = 2.8;
-  const LENS_W = 120, LENS_H = 120;
+
+/* ── IMAGE ZOOM MAGNIFIER ── */
+document.querySelectorAll('.wb-img-wrap').forEach(function(wrap) {
+  var img    = wrap.querySelector('.wb-img');
+  var lens   = wrap.querySelector('.wb-lens');
+  var zbox   = wrap.querySelector('.wb-zoom-box');
+  var ZOOM   = 2.8;
+  var LENS_W = 130;
+  var LENS_H = 130;
 
   function activate() {
     lens.style.display = 'block';
     zbox.style.display = 'block';
-    zbox.style.backgroundImage  = `url('${img.src}')`;
+    zbox.style.backgroundImage  = "url('" + img.src + "')";
     zbox.style.backgroundRepeat = 'no-repeat';
-    // use getBoundingClientRect for accurate rendered size
-    const r = img.getBoundingClientRect();
-    zbox.style.backgroundSize = `${r.width * ZOOM}px ${r.height * ZOOM}px`;
+    var r = img.getBoundingClientRect();
+    zbox.style.backgroundSize = (r.width * ZOOM) + 'px ' + (r.height * ZOOM) + 'px';
   }
   function deactivate() {
     lens.style.display = 'none';
     zbox.style.display = 'none';
   }
   function move(e) {
-    if(zbox.style.display === 'none') return;
-    const r  = img.getBoundingClientRect();
-    const cx = e.clientX - r.left;
-    const cy = e.clientY - r.top;
-    const lx = Math.min(Math.max(cx - LENS_W/2, 0), r.width  - LENS_W);
-    const ly = Math.min(Math.max(cy - LENS_H/2, 0), r.height - LENS_H);
+    if (zbox.style.display === 'none') return;
+    var r  = img.getBoundingClientRect();
+    var cx = e.clientX - r.left;
+    var cy = e.clientY - r.top;
+    var lx = Math.min(Math.max(cx - LENS_W / 2, 0), r.width  - LENS_W);
+    var ly = Math.min(Math.max(cy - LENS_H / 2, 0), r.height - LENS_H);
     lens.style.left = lx + 'px';
     lens.style.top  = ly + 'px';
-    // zoom box: right if space, else left
-    const wrapRect = wrap.getBoundingClientRect();
-    if(window.innerWidth - wrapRect.right >= 280){
-      zbox.style.left  = 'calc(100% + 16px)';
+    var wrapRect = wrap.getBoundingClientRect();
+    if (window.innerWidth - wrapRect.right >= 320) {
+      zbox.style.left  = 'calc(100% + 12px)';
       zbox.style.right = 'auto';
     } else {
-      zbox.style.right = 'calc(100% + 16px)';
+      zbox.style.right = 'calc(100% + 12px)';
       zbox.style.left  = 'auto';
     }
-    const maxTop = r.height - 210;
-    zbox.style.top = Math.min(Math.max(ly - 45, 0), maxTop > 0 ? maxTop : 0) + 'px';
-    zbox.style.backgroundPosition = `-${lx * ZOOM}px -${ly * ZOOM}px`;
+    var maxTop = r.height - 240;
+    zbox.style.top = Math.min(Math.max(ly - 60, 0), maxTop > 0 ? maxTop : 0) + 'px';
+    zbox.style.backgroundPosition = '-' + (lx * ZOOM) + 'px -' + (ly * ZOOM) + 'px';
   }
-  wrap.addEventListener('mouseenter', activate);
-  wrap.addEventListener('mouseleave', deactivate);
-  wrap.addEventListener('mousemove',  move);
-});
 
+  if (lens && zbox) {
+    wrap.addEventListener('mouseenter', activate);
+    wrap.addEventListener('mouseleave', deactivate);
+    wrap.addEventListener('mousemove',  move);
+  }
+});
 </script>
 </body>
 </html>
